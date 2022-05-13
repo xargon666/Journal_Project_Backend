@@ -1,1 +1,13 @@
-# https-github.com-xargon666-Journal_Project_Backend
+# Journal Project Frontend
+
+## Description
+
+## Deployment
+
+## Installation & usage
+
+## Technologies
+
+## Process
+
+## Licence
