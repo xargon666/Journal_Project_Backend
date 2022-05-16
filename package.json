@@ -2,10 +2,10 @@
   "name": "journal_project_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./scripts/index.js",
   "scripts": {
     "testUtils": "nodemon ./scripts/utils.js --ignore ./scripts/data.json",
-    "start": "node scripts/server.js",
+    "start": "node scripts/index.js",
     "dev": "nodemon ./scripts/index.js",
     "test": "jest --silent --watchAll",
     "coverage": "jest --coverage --silent"
