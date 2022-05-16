@@ -6,6 +6,7 @@ const {
   findPostById,
   addPost,
   readDataFromFile,
+  deletePost,
   dataUrl,
 } = require("./utils.js");
 
@@ -48,32 +49,21 @@ app.post("/posts", (req, res) => {
   }
 });
 
-app.delete("/students/:name", (req, res) => {
+app.delete('/posts', (req, res) => {
   try {
-    const newPost = req.body;
+    const postToBeDeleted = req.body
 
-    const foundPostIndex = Post.findIndex(
-      (Post) =>
-        Post.postRef.toLocaleLowerCase() === newPost.postRef.toLowerCase()
-    );
-    console.log("delete - found Post", foundPostIndex);
+    const filteredData = deletePost(postToBeDeleted)
 
-    if (foundPostIndex === -1) {
-      throw new Error("this post does not exist");
+    if (!filteredData) {
+      throw new Error('this post does not exist')
     } else {
-      Post.splice(foundPostIndex, 1);
-      let message = `${postRef} has been deleted.`;
-      console.log(message);
-      res.status(200).send({ message });
+      res.status(200).send(filteredData)
     }
   } catch (err) {
     res.status(404).send({ error: err.message });
   }
-});
-// aap.get  / tick
-// app.get   /posts tick
-// app.get  / posts/:id
-// app.post   /posts
-// app.delete  /posts/:id
+})
+
 
 module.exports = app;
