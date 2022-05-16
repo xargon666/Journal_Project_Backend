@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const Post = require("./data");
+let 
+const {addComment, findPostById, addPost,readDataFromFile, dataUrl} = require("./utils.js")
 
 const app = express();
 app.use(express.json());
@@ -11,24 +13,20 @@ app.get("/", (req, res) => {
 });
 
 app.get("/posts", (req, res) => {
-  res.send(Post);
+  const allPosts = readDataFromFile(dataUrl)
+  res.send(allPosts)
 });
 
 app.get("/posts/:id", (req, res) => {
   try {
-    const postsId = parseInt(req.params.id);
-    const post = Post[postsId - 1];
+    const post = req.body
 
     if (!post) {
       throw new Error("this post does not exist");
     } else {
+      const retrievedPost = findPostById(post, dataUrl)
       res.send(
-        post
-        // (id = post.id),
-        // (body = post.body),
-        // (link = post.link),
-        // (date = post.date),
-        // (postRef = post.postRef)
+        retrievedPost
       );
     }
   } catch (err) {
@@ -39,17 +37,19 @@ app.get("/posts/:id", (req, res) => {
 app.post("/posts", (req, res) => {
   const newPost = req.body;
 
-  const foundPostIndex = Post.findIndex(
-    (Post) => Post.postRef.toLocaleLowerCase() === newPost.postRef.toLowerCase()
-  );
+  // const foundPostIndex = Post.findIndex(
+  //   (Post) => Post.postRef.toLocaleLowerCase() === newPost.postRef.toLowerCase()
+  // );
 
+    const updatedData = addPost(newPost)
   try {
-    if (foundPostIndex !== -1) {
-      throw new Error("this post exists");
-    } else {
-      Post.push(newPost);
-      res.status(201).send(newPost);
-    }
+      res.status(201).send(updatedData)
+  //   if (foundPostIndex !== -1) {
+  //     throw new Error("this post exists");
+  //   } else {
+  //     Post.push(newPost);
+  //     res.status(201).send(newPost);
+  //   }
   } catch (err) {
     res.status(405).send({ error: err.message });
   }
