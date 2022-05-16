@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node scripts/server.js",
+    "dev": "nodemon ./scripts/index.js",
+    "test": "jest --silent --watchAll",
+    "coverage": "jest --coverage --silent"
   },
   "repository": {
     "type": "git",
@@ -18,6 +21,12 @@
   },
   "homepage": "https://github.com/xargon666/Journal_Project_Backend#readme",
   "devDependencies": {
-    "jest": "^28.1.0"
+    "jest": "^28.1.0",
+    "nodemon": "^2.0.16",
+    "supertest": "^6.2.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1"
   }
 }
