@@ -20,6 +20,17 @@ describe("api server", () => {
   test("it responds to get /posts/:id with status 200", (done) => {
     request(api).get("/posts/ajdj-sds2-sdsd").expect(200, done);
   });
+
+  test("it responds to post /posts with status 201", (done) => {
+    const testData = {
+      title: "test1 title",
+      body: "test1 body",
+      link: "test1 link",
+    };
+
+    request(api).post("/posts").send(testData).expect(201, done);
+  });
+
   afterAll((done) => {
     console.log("Gracefully stopping test server");
     api.close(done);
