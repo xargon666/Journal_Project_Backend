@@ -1,6 +1,6 @@
 const fs = require('fs')
 const { v4: uuidv4 } = require('uuid')
-const dataUrl = './data.json'
+export let dataUrl = './data.json'
 
 class Post {
   constructor(title, body, link = null) {
@@ -63,7 +63,7 @@ class Comment {
 
 // Utility Function
 // reads the JSOn file, converts it to a JS Object and returns it
-function readDataFromFile(filename) {
+export function readDataFromFile(filename) {
   try {
     const data = fs.readFileSync(filename)
     const jsonData = JSON.parse(data)
@@ -93,7 +93,7 @@ function writePostToFile(filename, data) {
 // ready to be sent back to the frontend
 
 // Cannot use progressive ids as would be unable to delete posts
-function addPost(post) {
+export function addPost(post) {
   console.log('postObject -> ', post)
 
   // getting the posts as a JS Object
@@ -154,7 +154,7 @@ function addPost(post) {
 // }
 
 // Find a post by using its UUID
-function findPostById(post, filename) {
+export function findPostById(post, filename) {
   const allPostsObj = readDataFromFile(filename)
   // console.log('\nfindPostByUUID - allPosts.Obj -> ', allPostsObj)
   // const postId = (post) => post.id
@@ -177,7 +177,7 @@ function findPostById(post, filename) {
   }
 }
 
-function addComment(post, comment, filename) {
+export function addComment(post, comment, filename) {
   const allPostsObj = readDataFromFile(filename)
   console.log('\naddComment - allPosts.Obj -> ', allPostsObj)
   console.log('\naddComment - type of allPosts.Obj -> ', typeof allPostsObj)
