@@ -94,7 +94,7 @@ function writePostToFile(filename, data) {
 
 // Cannot use progressive ids as would be unable to delete posts
 function addPost(post) {
-  console.log('postObject -> ', post)
+  // console.log('postObject -> ', post)
 
   // getting the posts as a JS Object
   let data = readDataFromFile(dataUrl)
@@ -103,7 +103,7 @@ function addPost(post) {
 
   // adding the new Post to the data Array
   data = [...data, newPost]
-  console.log('\naddPost - data after post added -> ', data)
+  // console.log('\naddPost - data after post added -> ', data)
   let updatedData = writePostToFile(dataUrl, data)
 
   return updatedData
@@ -128,60 +128,68 @@ function findPostById(post, filename) {
     return null
   } else {
     const targetPostObj = allPostsObj[targetPostIndex]
-    console.log('\n findPostById - Returning the post: ', targetPostObj)
+    // console.log('\n findPostById - Returning the post: ', targetPostObj)
     return targetPostObj
   }
 }
 
 function addComment(post, comment, filename) {
   const allPostsObj = readDataFromFile(filename)
-  console.log('\naddComment - allPosts.Obj -> ', allPostsObj)
-  console.log('\naddComment - type of allPosts.Obj -> ', typeof allPostsObj)
+  // console.log('\naddComment - allPosts.Obj -> ', allPostsObj)
+  // console.log('\naddComment - type of allPosts.Obj -> ', typeof allPostsObj)
 
   const newComment = new Comment(comment.body, post, (link = ''))
 
   const targetPostIndex = allPostsObj.findIndex(
     (postElem) => postElem.id === post.id
   )
-  console.log('***** addComment - targetPostIndex -> ', targetPostIndex)
+  // console.log('***** addComment - targetPostIndex -> ', targetPostIndex)
   if (targetPostIndex === -1) {
     return null
   } else {
-    console.log(
-      '\n\nAAAAA addComment - allPostsObj[targetPostIndex] -> ',
-      allPostsObj[targetPostIndex]
-    )
+    // console.log(
+    //   '\n\nAAAAA addComment - allPostsObj[targetPostIndex] -> ',
+    //   allPostsObj[targetPostIndex]
+    // )
     allPostsObj[targetPostIndex].comments.push(newComment)
 
     writePostToFile(dataUrl, allPostsObj)
   }
 }
 
+module.exports = {
+  addPost,
+  findPostById,
+  addComment,
+  readDataFromFile,
+  dataUrl,
+}
+
 // TESTING
 
-console.log('\nwriting and reading to the DB - testing starts here...\n')
+// console.log('\nwriting and reading to the DB - testing starts here...\n')
 
-console.log('reading data from file\n', readDataFromFile(dataUrl))
+// console.log('reading data from file\n', readDataFromFile(dataUrl))
 
-console.log('\n----------\n')
+// console.log('\n----------\n')
 
-const samplePost2 = {
-  id: 'dbdae69a-99d5-4c71-addc-fbc831f13f01',
-  title: 'Post Three added',
-  body: 'Post 3 added',
-  link: 'ccc',
-  date: 'Mon May 16 2022 09:41:59',
-  comments: [],
-  reactions: { laugh: 0, thumbUp: 0, poo: 0 },
-}
+// const samplePost2 = {
+//   id: 'dbdae69a-99d5-4c71-addc-fbc831f13f01',
+//   title: 'Post Three added',
+//   body: 'Post 3 added',
+//   link: 'ccc',
+//   date: 'Mon May 16 2022 09:41:59',
+//   comments: [],
+//   reactions: { laugh: 0, thumbUp: 0, poo: 0 },
+// }
 
-const sampleComment1 = {
-  id: 34567,
-  body: 'Great Post, wanted to comment on it',
-  link: 'http://wherever.com',
-  date: 'Mon May 16 2022 17:27:52',
-  postRef: '67197f9a-fb38-4a81-b223-c76e695cd0fa',
-}
+// const sampleComment1 = {
+//   id: 34567,
+//   body: 'Great Post, wanted to comment on it',
+//   link: 'http://wherever.com',
+//   date: 'Mon May 16 2022 17:27:52',
+//   postRef: '67197f9a-fb38-4a81-b223-c76e695cd0fa',
+// }
 
 // Call this to find a post by ID
 // findPostById(samplePost, dataUrl)
@@ -190,5 +198,5 @@ const sampleComment1 = {
 // console.log('comment1 -> ', comment1)
 
 // Use this when adding comments
-const postAfterCommentAdded = addComment(samplePost2, sampleComment1, dataUrl)
-console.log('Post after comment added', postAfterCommentAdded)
+// const postAfterCommentAdded = addComment(samplePost2, sampleComment1, dataUrl)
+// console.log('Post after comment added', postAfterCommentAdded)
