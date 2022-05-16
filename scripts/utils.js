@@ -182,6 +182,8 @@ function addComment(post, comment, filename) {
     allPostsObj[targetPostIndex].comments.push(newComment)
 
     writePostToFile(dataUrl, allPostsObj)
+    const retrievedPost = findPostById(post.id, dataUrl)
+    return retrievedPost
   }
 }
 

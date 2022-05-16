@@ -7,8 +7,9 @@ const {
   addPost,
   readDataFromFile,
   deletePost,
-  dataUrl,
-} = require("./utils.js");
+  dataUrl
+  } = require('./utils.js')
+
 
 const app = express();
 app.use(express.json());
@@ -66,4 +67,42 @@ app.delete('/posts', (req, res) => {
 })
 
 
-module.exports = app;
+app.post('/posts/comments', (req, res) => {
+  // Expecting to receive an object with the following structure:
+  // {
+  //   "post": {
+  // "id": "d48fs-4sdf4-sdfsd4" <- important bit
+  // "title": "postTitle",
+  // "body": "body of post in here",
+  // "link": "link of post in here"
+  // }
+  //   "comment": {
+  //     "title": "Title of the comment",
+  //     "body": "body of the comment",
+  //     "link": "link of the comment"
+  //   }
+  // }
+
+  try {
+    const post = req.body.post
+    const comment = req.body.comment
+    console.log('posts/comments - post -> ', post)
+    console.log('posts/comments - comment -> ', comment)
+
+    const retrievedPostAndComments = addComment(post, comment, dataUrl)
+    console.log(
+      'server.js - posts/comments - retrievedPostsAndComments -> ',
+      retrievedPostAndComments
+    )
+
+    if (!retrievedPostAndComments) {
+      throw new Error('could not add the comment as post wasn;t found')
+    }
+    res.status(201).send(retrievedPostAndComments)
+  } catch (err) {
+    res.status(404).send({ error: err.message })
+  }
+})
+
+module.exports = app
+
