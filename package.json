@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "testUtils": "nodemon ./utils.js --ignore ./data.json",
+    "testUtils": "nodemon ./scripts/utils.js --ignore ./scripts/data.json",
     "start": "node scripts/server.js",
     "dev": "nodemon ./scripts/index.js",
     "test": "jest --silent --watchAll",

@@ -1,6 +1,6 @@
 const fs = require('fs')
 const { v4: uuidv4 } = require('uuid')
-export let dataUrl = './data.json'
+let dataUrl = './scripts/data.json'
 
 class Post {
   constructor(title, body, link = null) {
@@ -63,7 +63,7 @@ class Comment {
 
 // Utility Function
 // reads the JSOn file, converts it to a JS Object and returns it
-export function readDataFromFile(filename) {
+function readDataFromFile(filename) {
   try {
     const data = fs.readFileSync(filename)
     const jsonData = JSON.parse(data)
@@ -93,21 +93,14 @@ function writePostToFile(filename, data) {
 // ready to be sent back to the frontend
 
 // Cannot use progressive ids as would be unable to delete posts
-export function addPost(post) {
+function addPost(post) {
   console.log('postObject -> ', post)
 
   // getting the posts as a JS Object
   let data = readDataFromFile(dataUrl)
-  // console.log('\naddPost - data -> ', data)
 
-  // const postsNumber = data.length
-  // console.log('data length --------', postsNumber)
-
-  // creating a new Post object
   const newPost = new Post(post.title, post.body, post.link)
-  // newPost.id = postsNumber + 1
 
-  // console.log('newPost -> ', newPost)
   // adding the new Post to the data Array
   data = [...data, newPost]
   console.log('\naddPost - data after post added -> ', data)
@@ -116,45 +109,8 @@ export function addPost(post) {
   return updatedData
 }
 
-// Use this to add a Post
-// const dataAfterOnePostAdded = addPost({
-//   title: 'Post Three added',
-//   body: 'Post 3 added',
-//   link: 'ccc',
-// })
-
-// console.log('\nData after one post added -> ', dataAfterOnePostAdded)
-
-// writePostToFile(dataUrl, {
-//   id: 5,
-//   title: 'Post Two in file',
-//   body: 'Post 2 in File',
-//   link: 'aaa',
-//   date: 'Sat May 14 2022 19:40:13',
-//   comments: [],
-//   reactions: { laugh: 0, thumbUp: 0, poo: 0 },
-// })
-
-// console.log(
-//   'reading data from file after one post added\n',
-//   readDataFromFile(dataUrl)
-// )
-
-// function readCommentsOfPost(filename) {
-//   try {
-//     const data = fs.readFileSync(filename)
-//     const jsonData = JSON.parse(data)
-//     console.log(`readDataFromFile - logging JSOn string ->\n${data}\n `)
-//     console.log('readDataFromFile - logginf JS object -> \n', jsonData)
-
-//     const postIndex = jsonData.find
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
-
 // Find a post by using its UUID
-export function findPostById(post, filename) {
+function findPostById(post, filename) {
   const allPostsObj = readDataFromFile(filename)
   // console.log('\nfindPostByUUID - allPosts.Obj -> ', allPostsObj)
   // const postId = (post) => post.id
@@ -177,7 +133,7 @@ export function findPostById(post, filename) {
   }
 }
 
-export function addComment(post, comment, filename) {
+function addComment(post, comment, filename) {
   const allPostsObj = readDataFromFile(filename)
   console.log('\naddComment - allPosts.Obj -> ', allPostsObj)
   console.log('\naddComment - type of allPosts.Obj -> ', typeof allPostsObj)
@@ -208,17 +164,6 @@ console.log('\nwriting and reading to the DB - testing starts here...\n')
 console.log('reading data from file\n', readDataFromFile(dataUrl))
 
 console.log('\n----------\n')
-
-// Sample Post for testing purposes
-// const samplePost = {
-//   id: 'dbdae69a-99d5-4c71-addc-fbc831f13f01',
-//   title: 'Post Three added',
-//   body: 'Post 3 added',
-//   link: 'ccc',
-//   date: 'Mon May 16 2022 09:41:59',
-//   comments: [],
-//   reactions: { laugh: 0, thumbUp: 0, poo: 0 },
-// }
 
 const samplePost2 = {
   id: 'dbdae69a-99d5-4c71-addc-fbc831f13f01',
