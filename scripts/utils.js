@@ -137,6 +137,30 @@ function findPostById(postId, filename) {
   }
 }
 
+function deletePost(post) {
+  const postId = post.id
+  console.log('deletePost - postId: ', postId)
+
+  // getting the posts as a JS Object
+  const data = readDataFromFile(dataUrl)
+
+  // filter the posts, leave out the one that has same id as postId
+  const postIndex = data.findIndex((postElement) => postElement.id === postId)
+  console.log('deletePost - postIndex: ', postIndex)
+
+  if (postIndex === -1) {
+    console.log('post not found')
+    return null
+  } else {
+    const filteredPostsArray = data.filter(
+      (postElement) => postElement.id !== post.id
+    )
+    console.log(filteredPostsArray)
+    writePostToFile(dataUrl, filteredPostsArray)
+    return filteredPostsArray
+  }
+}
+
 function addComment(post, comment, filename) {
   const allPostsObj = readDataFromFile(filename)
   // console.log('\naddComment - allPosts.Obj -> ', allPostsObj)
@@ -166,6 +190,7 @@ module.exports = {
   findPostById,
   addComment,
   readDataFromFile,
+  deletePost,
   dataUrl,
 }
 
