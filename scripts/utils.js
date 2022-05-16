@@ -166,7 +166,7 @@ function addComment(post, comment, filename) {
   // console.log('\naddComment - allPosts.Obj -> ', allPostsObj)
   // console.log('\naddComment - type of allPosts.Obj -> ', typeof allPostsObj)
 
-  const newComment = new Comment(comment.body, post, (link = ''))
+  const newComment = new Comment(comment.body, post, comment.link)
 
   const targetPostIndex = allPostsObj.findIndex(
     (postElem) => postElem.id === post.id
