@@ -13,8 +13,12 @@ describe("api server", () => {
     request(api).get("/").expect(200, done);
   });
 
+  test("it responds to get /posts with status 200", (done) => {
+    request(api).get("/posts").expect(200, done);
+  });
+
   afterAll((done) => {
-    console.log("Gracefully stoppinf test server");
+    console.log("Gracefully stopping test server");
     api.close(done);
   });
 });
