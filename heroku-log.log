@@ -1,1 +1,49 @@
-heroku logs --tail
+2022-05-16T13:37:59.739186+00:00 app[api]: Release v1 created by user chris.pucknell@gmail.com
+2022-05-16T13:37:59.739186+00:00 app[api]: Initial release by user chris.pucknell@gmail.com
+2022-05-16T13:37:59.900186+00:00 app[api]: Enable Logplex by user chris.pucknell@gmail.com
+2022-05-16T13:37:59.900186+00:00 app[api]: Release v2 created by user chris.pucknell@gmail.com
+2022-05-16T13:41:31.000000+00:00 app[api]: Build started by user chris.pucknell@gmail.com
+2022-05-16T13:41:54.854654+00:00 app[api]: Release v3 created by user chris.pucknell@gmail.com
+2022-05-16T13:41:54.854654+00:00 app[api]: Deploy 6884baf7 by user chris.pucknell@gmail.com
+2022-05-16T13:41:54.872237+00:00 app[api]: Scaled to web@1:Free by user chris.pucknell@gmail.com
+2022-05-16T13:41:56.000000+00:00 app[api]: Build succeeded
+2022-05-16T13:41:56.665357+00:00 heroku[web.1]: Starting process with command `npm start`
+2022-05-16T13:41:57.724267+00:00 app[web.1]: 
+2022-05-16T13:41:57.724296+00:00 app[web.1]: > journal_project_backend@1.0.0 start
+2022-05-16T13:41:57.724297+00:00 app[web.1]: > node scripts/server.js
+2022-05-16T13:41:57.724297+00:00 app[web.1]: 
+2022-05-16T13:41:58.025566+00:00 heroku[web.1]: Process exited with status 0
+2022-05-16T13:41:58.081389+00:00 heroku[web.1]: State changed from starting to crashed
+2022-05-16T13:41:58.094859+00:00 heroku[web.1]: State changed from crashed to starting
+2022-05-16T13:41:59.677244+00:00 heroku[web.1]: Starting process with command `npm start`
+2022-05-16T13:42:00.717088+00:00 app[web.1]: 
+2022-05-16T13:42:00.717100+00:00 app[web.1]: > journal_project_backend@1.0.0 start
+2022-05-16T13:42:00.717100+00:00 app[web.1]: > node scripts/server.js
+2022-05-16T13:42:00.717101+00:00 app[web.1]: 
+2022-05-16T13:42:00.965185+00:00 heroku[web.1]: Process exited with status 0
+2022-05-16T13:42:01.051550+00:00 heroku[web.1]: State changed from starting to crashed
+2022-05-16T13:42:35.147185+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=d97ebdec-0f19-4002-9663-c9d12630e7fe fwd="86.185.251.186" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:42:38.623113+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=journal-project-backend.herokuapp.com request_id=4f854132-6e63-47a1-85a5-18d5a5ef2eec fwd="86.185.251.186" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:45:57.266433+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=4560c957-01db-4f17-8bc6-83953a21a5bf fwd="86.185.251.186" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:50:36.660976+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=05fcfefc-a540-4f2a-bfad-e5454320cb31 fwd="86.185.251.186" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:51:01.641588+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=876180c6-c17a-4758-b619-2852dddcab24 fwd="34.205.81.152" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:51:10.475623+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=78f85d5c-ef04-442f-9fbe-be9f35f95a29 fwd="86.19.145.70" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:51:11.817071+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=journal-project-backend.herokuapp.com request_id=8a13174e-ca76-4e64-99b1-31971f096f78 fwd="86.19.145.70" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:54:00.911685+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=459668a3-7b5e-474a-b19b-1d49eec57bc0 fwd="138.199.63.40" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:54:01.377037+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=journal-project-backend.herokuapp.com request_id=fa3370d5-ab4c-4d8f-8f89-58f2a07176b8 fwd="138.199.63.40" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:54:10.595160+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=b0bf398c-fe65-460b-8dbf-9820e146cfcc fwd="82.46.140.249" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:54:11.409159+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=journal-project-backend.herokuapp.com request_id=6515c4b3-451c-4580-a63a-4a911de2a5f4 fwd="82.46.140.249" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:54:38.572089+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=0b7f89cf-9435-426c-99e9-de7b401ab0ad fwd="82.46.140.249" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:54:39.089162+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=journal-project-backend.herokuapp.com request_id=577ff0aa-8ae2-41a3-a4db-82423a247210 fwd="82.46.140.249" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:54:40.016997+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=c0417e9e-db35-4fc2-8096-7ca9ff0ea34c fwd="138.199.63.40" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:54:40.249800+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=journal-project-backend.herokuapp.com request_id=f012de39-f1b0-4545-957b-d089d16bc848 fwd="138.199.63.40" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:58:50.411056+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=523dd541-4413-4368-ab32-c97fc1a9f2ba fwd="138.199.63.40" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T13:58:50.674095+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=journal-project-backend.herokuapp.com request_id=743deca4-9fe4-4647-8895-cc9897146126 fwd="138.199.63.40" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T14:01:09.548531+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=b4fd0000-cdd7-4cd6-afca-67c22e5424cd fwd="82.46.140.249" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T14:01:09.944292+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=journal-project-backend.herokuapp.com request_id=90cddd08-02a1-4d24-8cd7-7505d662e642 fwd="82.46.140.249" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T14:05:36.619708+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=662475ec-7ba9-4091-a182-aca591417c50 fwd="138.199.63.40" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T14:05:36.927667+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=journal-project-backend.herokuapp.com request_id=9d81a406-3c9f-4b07-a04f-1de9de956bf6 fwd="138.199.63.40" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T14:09:55.805751+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=journal-project-backend.herokuapp.com request_id=c6622896-3929-43a6-886d-528e7436f218 fwd="86.19.145.70" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T14:09:56.694340+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=journal-project-backend.herokuapp.com request_id=176cdb92-da97-4383-bd99-b148914c1320 fwd="86.19.145.70" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T14:10:01.649979+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/0" host=journal-project-backend.herokuapp.com request_id=9c05064e-d246-47c4-b1eb-ea78d73a419a fwd="86.19.145.70" dyno= connect= service= status=503 bytes= protocol=https
+2022-05-16T14:10:02.261665+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=journal-project-backend.herokuapp.com request_id=1753bc34-956f-4257-bf64-cd3ac2e515c8 fwd="86.19.145.70" dyno= connect= service= status=503 bytes= protocol=https
