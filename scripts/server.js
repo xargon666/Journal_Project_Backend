@@ -24,12 +24,12 @@ app.get('/posts', (req, res) => {
 
 app.get('/posts/:id', (req, res) => {
   try {
-    const post = req.body
-
+    const post = String(req.params.id)
+    console.log('server.js - GET /posts/:id - post', post)
+    const retrievedPost = findPostById(post, dataUrl)
     if (!post) {
       throw new Error('this post does not exist')
     } else {
-      const retrievedPost = findPostById(post, dataUrl)
       res.send(retrievedPost)
     }
   } catch (err) {

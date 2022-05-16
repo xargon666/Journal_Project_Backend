@@ -106,21 +106,25 @@ function addPost(post) {
   // console.log('\naddPost - data after post added -> ', data)
   let updatedData = writePostToFile(dataUrl, data)
 
-  return updatedData
+  return data
 }
 
 // Find a post by using its UUID
-function findPostById(post, filename) {
+function findPostById(postId, filename) {
   const allPostsObj = readDataFromFile(filename)
-  // console.log('\nfindPostByUUID - allPosts.Obj -> ', allPostsObj)
+  console.log('\nfindPostByUUID - allPosts.Obj -> ', allPostsObj)
   // const postId = (post) => post.id
-  // console.log('\nfindPostByUUID - postId -> ', postId)
+  console.log('\nfindPostByUUID - postId -> ', postId)
 
-  // console.log('\n===== findPostById - allPostsObj type -> ', typeof allPostsObj)
+  console.log('\n===== findPostById - allPostsObj type -> ', typeof allPostsObj)
 
-  const targetPostIndex = allPostsObj.findIndex(
-    (postElement) => postElement.id === post.id
-  )
+  const targetPostIndex = allPostsObj.findIndex((postElement, index) => {
+    // console.log('index: ', index)
+    // console.log('postElement', postElement)
+    // console.log('postElement.id -> ', postElement.id)
+    // console.log('postId', postId)
+    return postElement.id === postId
+  })
   // console.log('\nfindPostByUUID - targetPostIndex -> ', targetPostIndex)
 
   if (targetPostIndex === -1) {
@@ -128,7 +132,7 @@ function findPostById(post, filename) {
     return null
   } else {
     const targetPostObj = allPostsObj[targetPostIndex]
-    // console.log('\n findPostById - Returning the post: ', targetPostObj)
+    console.log('\n findPostById - Returning the post: ', targetPostObj)
     return targetPostObj
   }
 }

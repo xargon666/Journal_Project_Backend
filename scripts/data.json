@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "ajdj-sds2-sdsd",
     "title": "Post One in file",
     "body": "Post 1 in File",
     "link": "aaa",
@@ -9,12 +9,19 @@
     "reactions": { "laugh": 0, "thumbUp": 5, "poo": 0 }
   },
   {
-    "id": 2,
+    "id": "fds5-fdfs4-sdsds",
     "title": "Post Two in file",
     "body": "Post 2 in File",
     "link": "bbb",
     "date": "Sat May 14 2022 19:40:30",
     "comments": [],
     "reactions": { "laugh": 2, "thumbUp": 1, "poo": 5 }
+  },
+  {
+    "id": "01681be3-c36a-4cf5-9b10-b15236bb9608",
+    "link": "",
+    "date": "Mon May 16 2022 13:58:03",
+    "comments": [],
+    "reactions": { "laugh": 0, "thumbUp": 0, "poo": 0 }
   }
 ]
