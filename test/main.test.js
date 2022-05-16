@@ -17,6 +17,9 @@ describe("api server", () => {
     request(api).get("/posts").expect(200, done);
   });
 
+  test("it responds to get /posts/:id with status 200", (done) => {
+    request(api).get("/posts/ajdj-sds2-sdsd").expect(200, done);
+  });
   afterAll((done) => {
     console.log("Gracefully stopping test server");
     api.close(done);
