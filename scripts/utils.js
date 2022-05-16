@@ -104,7 +104,7 @@ function addPost(post) {
   // adding the new Post to the data Array
   data = [...data, newPost]
   // console.log('\naddPost - data after post added -> ', data)
-  let updatedData = writePostToFile(dataUrl, data)
+  writePostToFile(dataUrl, data)
 
   return data
 }
