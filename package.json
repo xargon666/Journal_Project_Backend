@@ -8,6 +8,7 @@
     "start": "node scripts/index.js",
     "dev": "nodemon ./scripts/index.js",
     "test": "jest --silent --watchAll",
+    "testonce": "jest",
     "coverage": "jest --coverage --silent"
   },
   "repository": {
