@@ -222,6 +222,22 @@ function convertNumToEmoji(emojiNumber) {
   }
 }
 
+function updatePost(post, newData, file) {
+  const allPostsObj = readDataFromFile(filename)
+  const targetPostIndex = allPostsObj.findIndex(
+    (postElement) => postElement.id === post.id
+  )
+
+  if (targetPostIndex === -1) {
+    throw new Error('Post was not found')
+  } else {
+    const targetPost = allPostsObj[targetPostIndex]
+
+    let postId = post.id
+    console.log('postId: ', postId)
+  }
+}
+
 module.exports = {
   addPost,
   findPostById,
@@ -229,5 +245,6 @@ module.exports = {
   readDataFromFile,
   deletePost,
   addEmoji,
+  updatePost,
   dataUrl,
 }

@@ -8,6 +8,7 @@ const {
   readDataFromFile,
   deletePost,
   addEmoji,
+  updatePost,
   dataUrl,
 } = require('./utils.js')
 
@@ -98,6 +99,31 @@ app.post('/posts/emojis', (req, res) => {
     }
   } catch (err) {
     res.status(405).send({ error: err.message })
+  }
+})
+
+app.patch('/posts', (req, res) => {
+  const post = req.post
+  const newData = req.newData
+
+  try {
+    if (!post || !newData) {
+      res
+        .status(405)
+        .send({ error: 'Both the original post and the new data are needed.' })
+    } else if (newData.title.length > 50 || newData.body > 200) {
+      res
+        .status(405)
+        .send({
+          error:
+            'Title cannot have more than 50 characters and Body cannot have more than 200 characters',
+        })
+    } else {
+      const updatedPostArray = updatePost(post, newData, dataUrl)
+      res.send(updatedPostArray)
+    }
+  } catch (err) {
+    res.status(404).send({ error: err })
   }
 })
 
