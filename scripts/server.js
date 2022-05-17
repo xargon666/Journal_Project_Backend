@@ -103,23 +103,25 @@ app.post('/posts/emojis', (req, res) => {
 })
 
 app.patch('/posts', (req, res) => {
-  const post = req.post
-  const newData = req.newData
+  const post = req.body.post
+  const newData = req.body.newData
 
   try {
     if (!post || !newData) {
       res
         .status(405)
         .send({ error: 'Both the original post and the new data are needed.' })
-    } else if (newData.title.length > 50 || newData.body > 200) {
-      res
-        .status(405)
-        .send({
-          error:
-            'Title cannot have more than 50 characters and Body cannot have more than 200 characters',
-        })
+    } else if (
+      (newData.title && newData.title.length > 50) ||
+      (newData.body && newData.body.length > 200)
+    ) {
+      res.status(405).send({
+        error:
+          'Title cannot be longer than 50 characters and body cannot be longer than 200 characters',
+      })
     } else {
       const updatedPostArray = updatePost(post, newData, dataUrl)
+
       res.send(updatedPostArray)
     }
   } catch (err) {

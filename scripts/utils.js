@@ -201,7 +201,7 @@ function addEmoji(post, emoji, filename) {
     const stringifiedPosts = JSON.stringify(allPostsObj)
 
     // replace all the content of the file
-    fs.writeFile(dataUrl, stringifiedPosts, 'utf8', () => {})
+    fs.writeFileSync(dataUrl, stringifiedPosts, 'utf8')
     return allPostsObj
   }
 }
@@ -222,8 +222,9 @@ function convertNumToEmoji(emojiNumber) {
   }
 }
 
-function updatePost(post, newData, file) {
+function updatePost(post, newData, filename) {
   const allPostsObj = readDataFromFile(filename)
+
   const targetPostIndex = allPostsObj.findIndex(
     (postElement) => postElement.id === post.id
   )
@@ -233,8 +234,18 @@ function updatePost(post, newData, file) {
   } else {
     const targetPost = allPostsObj[targetPostIndex]
 
-    let postId = post.id
-    console.log('postId: ', postId)
+    const propertiesToUpdate = Object.keys(newData)
+    propertiesToUpdate.forEach((prop) => {
+      targetPost[prop] = newData[prop]
+    })
+
+    allPostsObj.splice(targetPostIndex, 1, targetPost)
+
+    const stringifiedPosts = JSON.stringify(allPostsObj)
+
+    // replace all the content of the file
+    fs.writeFileSync(dataUrl, stringifiedPosts, 'utf8')
+    return allPostsObj
   }
 }
 
