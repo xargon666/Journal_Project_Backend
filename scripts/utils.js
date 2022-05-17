@@ -1,3 +1,4 @@
+const { Console } = require('console')
 const fs = require('fs')
 const { v4: uuidv4 } = require('uuid')
 let dataUrl = './scripts/data.json'
@@ -187,12 +188,61 @@ function addComment(post, comment, filename) {
   }
 }
 
+function addEmoji(post, emoji, filename) {
+  const allPostsObj = readDataFromFile(filename)
+  const targetPostIndex = allPostsObj.findIndex(
+    (postElement) => postElement.id === post.id
+  )
+  console.log('addEmoji - targetPostIndex -> ', targetPostIndex)
+
+  if (targetPostIndex === -1) {
+    console.log('Could not increase emoji status as post was not found.')
+    return null
+  } else {
+    const updatedPostArray = allPostsObj.map((postElement) => {
+      console.log('addEmoji - map - postElement.id -> ', postElement.id)
+      console.log('addEmoji - map - post.id -> ', post.id)
+      console.log('***** addEmoji - map -> ', convertNumToEmoji(0))
+      console.log(
+        'AAAAA addEmoji - map -> ',
+        postElement.reactions[convertNumToEmoji(String(emoji.emoji))]
+      )
+      if (postElement.id === post.id) {
+        return postElement.reactions[convertNumToEmoji(emoji.emoji)]++
+      }
+    })
+
+    console.log('addEmoji - updatedPostArray -> ', updatedPostArray)
+    // cancel all the content of the file
+    // fs.truncate(dataUrl, () => {})
+    fs.writeFileSync(JSON.stringify(updatedPostArray))
+    return updatedPostArray
+  }
+}
+
+function convertNumToEmoji(emojiNumber) {
+  switch (emojiNumber) {
+    case 0:
+      return 'laugh'
+
+    case 1:
+      return 'thumbUp'
+
+    case 2:
+      return 'poo'
+
+    default:
+      return null
+  }
+}
+
 module.exports = {
   addPost,
   findPostById,
   addComment,
   readDataFromFile,
   deletePost,
+  addEmoji,
   dataUrl,
 }
 
