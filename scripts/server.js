@@ -54,7 +54,7 @@ app.post('/posts', (req, res) => {
       res.status(201).send(updatedData)
     }
   } catch (err) {
-    res.status(405).send({ error: err.message })
+    res.status(404).send({ error: err.message })
   }
 })
 
@@ -64,11 +64,7 @@ app.delete('/posts', (req, res) => {
 
     const filteredData = deletePost(postToBeDeleted)
 
-    if (!filteredData) {
-      throw new Error('this post does not exist')
-    } else {
-      res.status(200).send(filteredData)
-    }
+    res.status(200).send(filteredData)
   } catch (err) {
     res.status(404).send({ error: err.message })
   }
@@ -88,7 +84,7 @@ app.post('/posts/comments', (req, res) => {
     )
 
     if (!retrievedPostAndComments) {
-      throw new Error('could not add the comment as post wasn;t found')
+      throw new Error('could not add the comment as post wasnt found')
     }
     res.status(201).send(retrievedPostAndComments)
   } catch (err) {
@@ -97,6 +93,7 @@ app.post('/posts/comments', (req, res) => {
 })
 
 app.post('/posts/emojis', (req, res) => {
+  console.log(typeof req.body)
   try {
     const post = req.body.post
     const clickedEmoji = req.body.emoji
@@ -107,7 +104,7 @@ app.post('/posts/emojis', (req, res) => {
       throw new Error('Invalid data')
     } else {
       const newData = addEmoji(post, clickedEmoji, dataUrl)
-      res.send(newData)
+      res.status(201).send(newData)
     }
   } catch (err) {
     res.status(405).send({ error: err.message })
