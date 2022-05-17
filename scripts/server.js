@@ -89,6 +89,7 @@ app.post('/posts/comments', (req, res) => {
 })
 
 app.post('/posts/emojis', (req, res) => {
+  console.log(typeof req.body)
   try {
     const post = req.body.post
     const clickedEmoji = req.body.emoji
