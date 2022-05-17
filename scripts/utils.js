@@ -113,45 +113,35 @@ function addPost(post) {
 // Find a post by using its UUID
 function findPostById(postId, filename) {
   const allPostsObj = readDataFromFile(filename)
-  console.log('\nfindPostByUUID - allPosts.Obj -> ', allPostsObj)
-  // const postId = (post) => post.id
-  console.log('\nfindPostByUUID - postId -> ', postId)
-
-  console.log('\n===== findPostById - allPostsObj type -> ', typeof allPostsObj)
 
   const targetPostIndex = allPostsObj.findIndex((postElement, index) => {
     return postElement.id === postId
   })
 
   if (targetPostIndex === -1) {
-    console.log('Post could not be found')
-    return null
+    throw new Error('Post could not be found')
   } else {
     const targetPostObj = allPostsObj[targetPostIndex]
-    console.log('\n findPostById - Returning the post: ', targetPostObj)
     return targetPostObj
   }
 }
 
 function deletePost(post) {
   const postId = post.id
-  console.log('deletePost - postId: ', postId)
 
   // getting the posts as a JS Object
   const data = readDataFromFile(dataUrl)
 
   // filter the posts, leave out the one that has same id as postId
   const postIndex = data.findIndex((postElement) => postElement.id === postId)
-  console.log('deletePost - postIndex: ', postIndex)
 
   if (postIndex === -1) {
-    console.log('post not found')
-    return null
+    throw new Error('Post was not found')
   } else {
     const filteredPostsArray = data.filter(
       (postElement) => postElement.id !== post.id
     )
-    console.log(filteredPostsArray)
+
     writePostToFile(dataUrl, filteredPostsArray)
     return filteredPostsArray
   }
@@ -167,7 +157,7 @@ function addComment(post, comment, filename) {
   )
 
   if (targetPostIndex === -1) {
-    return null
+    throw new Error('Post was not found')
   } else {
     allPostsObj[targetPostIndex].comments.push(newComment)
 
@@ -182,44 +172,29 @@ function addEmoji(post, emoji, filename) {
   const targetPostIndex = allPostsObj.findIndex(
     (postElement) => postElement.id === post.id
   )
-  console.log('addEmoji - targetPostIndex -> ', targetPostIndex)
 
   if (targetPostIndex === -1) {
-    console.log('Could not increase emoji status as post was not found.')
-    return null
+    throw new Error('Post was not found')
   } else {
     const targetPost = allPostsObj[targetPostIndex]
-    console.log('targetPost: ', targetPost)
-
     const emojiNum = Number(emoji)
-    console.log('emojiNum -> ', emojiNum)
+
+    if (emojiNum < 0 || emojiNum > 2) {
+      throw new Error('Trying to increase a non-existing emoji')
+      return allPostsObj
+    }
 
     const emojiToIncrease = convertNumToEmoji(emojiNum)
-    console.log('emojiToIncrease -> ', emojiToIncrease)
-
-    console.log('targetPost.reactions -> ', targetPost.reactions)
-
-    console.log('*** ', targetPost.reactions.emojiToIncrease)
-
     const emojiCountNumber = targetPost.reactions[emojiToIncrease]
-    console.log('emojiCountNumber -> ', emojiCountNumber)
-
     const increasedEmojiCounter = emojiCountNumber + 1
-    console.log('increrasedEmojiCounter ', increasedEmojiCounter)
+    targetPost.reactions[emojiToIncrease] = increasedEmojiCounter
 
-    const updatedReaction = (targetPost.reactions[emojiToIncrease] =
-      increasedEmojiCounter)
-    console.log('updatedReaction -> ', updatedReaction)
-
-    console.log('updatedtargetPost ->', targetPost)
-
-    // replace oldPost with new one
+    // updating the value of the post
     allPostsObj.splice(targetPostIndex, 1, targetPost)
-    console.log('allPostsObj ---> ', allPostsObj)
 
     const stringifiedPosts = JSON.stringify(allPostsObj)
 
-    // cancel all the content of the file
+    // replace all the content of the file
     fs.writeFile(dataUrl, stringifiedPosts, 'utf8', () => {
       console.log('replaced data')
     })
@@ -239,6 +214,7 @@ function convertNumToEmoji(emojiNumber) {
       return 'poo'
 
     default:
+      return ''
   }
 }
 
