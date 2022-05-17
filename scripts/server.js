@@ -20,14 +20,18 @@ app.get('/', (req, res) => {
 })
 
 app.get('/posts', (req, res) => {
-  const allPosts = readDataFromFile(dataUrl)
-  res.send(allPosts)
+  try {
+    const allPosts = readDataFromFile(dataUrl)
+    res.send(allPosts)
+  } catch (err) {
+    res.status(404).send({ error: err })
+  }
 })
 
 app.get('/posts/:id', (req, res) => {
   try {
     const post = String(req.params.id)
-    console.log('server.js - GET /posts/:id - post', post)
+
     const retrievedPost = findPostById(post, dataUrl)
     if (!post || !retrievedPost) {
       throw new Error('this post does not exist')
@@ -57,7 +61,6 @@ app.post('/posts', (req, res) => {
 app.delete('/posts', (req, res) => {
   try {
     const postToBeDeleted = req.body
-
     const filteredData = deletePost(postToBeDeleted)
 
     res.status(200).send(filteredData)
@@ -70,14 +73,8 @@ app.post('/posts/comments', (req, res) => {
   try {
     const post = req.body.post
     const comment = req.body.comment
-    console.log('posts/comments - post -> ', post)
-    console.log('posts/comments - comment -> ', comment)
 
     const retrievedPostAndComments = addComment(post, comment, dataUrl)
-    console.log(
-      'server.js - posts/comments - retrievedPostsAndComments -> ',
-      retrievedPostAndComments
-    )
 
     if (!retrievedPostAndComments) {
       throw new Error('could not add the comment as post wasnt found')
@@ -89,12 +86,9 @@ app.post('/posts/comments', (req, res) => {
 })
 
 app.post('/posts/emojis', (req, res) => {
-  console.log(typeof req.body)
   try {
     const post = req.body.post
     const clickedEmoji = req.body.emoji
-    console.log('POST /posts/emojis - post ->', post)
-    console.log('POST /posts/emojis - emoji ->', clickedEmoji)
 
     if (!post || !clickedEmoji) {
       throw new Error('Invalid data')
