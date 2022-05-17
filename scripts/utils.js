@@ -113,50 +113,35 @@ function addPost(post) {
 // Find a post by using its UUID
 function findPostById(postId, filename) {
   const allPostsObj = readDataFromFile(filename)
-  console.log('\nfindPostByUUID - allPosts.Obj -> ', allPostsObj)
-  // const postId = (post) => post.id
-  console.log('\nfindPostByUUID - postId -> ', postId)
-
-  console.log('\n===== findPostById - allPostsObj type -> ', typeof allPostsObj)
 
   const targetPostIndex = allPostsObj.findIndex((postElement, index) => {
-    // console.log('index: ', index)
-    // console.log('postElement', postElement)
-    // console.log('postElement.id -> ', postElement.id)
-    // console.log('postId', postId)
     return postElement.id === postId
   })
-  // console.log('\nfindPostByUUID - targetPostIndex -> ', targetPostIndex)
 
   if (targetPostIndex === -1) {
-    console.log('Post could not be found')
-    return null
+    throw new Error('Post could not be found')
   } else {
     const targetPostObj = allPostsObj[targetPostIndex]
-    console.log('\n findPostById - Returning the post: ', targetPostObj)
     return targetPostObj
   }
 }
 
 function deletePost(post) {
   const postId = post.id
-  console.log('deletePost - postId: ', postId)
 
   // getting the posts as a JS Object
   const data = readDataFromFile(dataUrl)
 
   // filter the posts, leave out the one that has same id as postId
   const postIndex = data.findIndex((postElement) => postElement.id === postId)
-  console.log('deletePost - postIndex: ', postIndex)
 
   if (postIndex === -1) {
-    console.log('post not found')
-    return null
+    throw new Error('Post was not found')
   } else {
     const filteredPostsArray = data.filter(
       (postElement) => postElement.id !== post.id
     )
-    console.log(filteredPostsArray)
+
     writePostToFile(dataUrl, filteredPostsArray)
     return filteredPostsArray
   }
@@ -164,22 +149,16 @@ function deletePost(post) {
 
 function addComment(post, comment, filename) {
   const allPostsObj = readDataFromFile(filename)
-  // console.log('\naddComment - allPosts.Obj -> ', allPostsObj)
-  // console.log('\naddComment - type of allPosts.Obj -> ', typeof allPostsObj)
 
   const newComment = new Comment(comment.body, post, comment.link)
 
   const targetPostIndex = allPostsObj.findIndex(
     (postElem) => postElem.id === post.id
   )
-  // console.log('***** addComment - targetPostIndex -> ', targetPostIndex)
+
   if (targetPostIndex === -1) {
-    return null
+    throw new Error('Post was not found')
   } else {
-    // console.log(
-    //   '\n\nAAAAA addComment - allPostsObj[targetPostIndex] -> ',
-    //   allPostsObj[targetPostIndex]
-    // )
     allPostsObj[targetPostIndex].comments.push(newComment)
 
     writePostToFile(dataUrl, allPostsObj)
@@ -193,30 +172,33 @@ function addEmoji(post, emoji, filename) {
   const targetPostIndex = allPostsObj.findIndex(
     (postElement) => postElement.id === post.id
   )
-  console.log('addEmoji - targetPostIndex -> ', targetPostIndex)
 
   if (targetPostIndex === -1) {
-    console.log('Could not increase emoji status as post was not found.')
-    return null
+    throw new Error('Post was not found')
   } else {
-    const updatedPostArray = allPostsObj.map((postElement) => {
-      console.log('addEmoji - map - postElement.id -> ', postElement.id)
-      console.log('addEmoji - map - post.id -> ', post.id)
-      console.log('***** addEmoji - map -> ', convertNumToEmoji(0))
-      console.log(
-        'AAAAA addEmoji - map -> ',
-        postElement.reactions[convertNumToEmoji(String(emoji.emoji))]
-      )
-      if (postElement.id === post.id) {
-        return postElement.reactions[convertNumToEmoji(emoji.emoji)]++
-      }
-    })
+    const targetPost = allPostsObj[targetPostIndex]
+    const emojiNum = Number(emoji)
 
-    console.log('addEmoji - updatedPostArray -> ', updatedPostArray)
-    // cancel all the content of the file
-    // fs.truncate(dataUrl, () => {})
-    fs.writeFileSync(JSON.stringify(updatedPostArray))
-    return updatedPostArray
+    if (emojiNum < 0 || emojiNum > 2) {
+      throw new Error('Trying to increase a non-existing emoji')
+      return allPostsObj
+    }
+
+    const emojiToIncrease = convertNumToEmoji(emojiNum)
+    const emojiCountNumber = targetPost.reactions[emojiToIncrease]
+    const increasedEmojiCounter = emojiCountNumber + 1
+    targetPost.reactions[emojiToIncrease] = increasedEmojiCounter
+
+    // updating the value of the post
+    allPostsObj.splice(targetPostIndex, 1, targetPost)
+
+    const stringifiedPosts = JSON.stringify(allPostsObj)
+
+    // replace all the content of the file
+    fs.writeFile(dataUrl, stringifiedPosts, 'utf8', () => {
+      console.log('replaced data')
+    })
+    return allPostsObj
   }
 }
 
@@ -232,7 +214,7 @@ function convertNumToEmoji(emojiNumber) {
       return 'poo'
 
     default:
-      return null
+      return ''
   }
 }
 
@@ -245,39 +227,3 @@ module.exports = {
   addEmoji,
   dataUrl,
 }
-
-// TESTING
-
-// console.log('\nwriting and reading to the DB - testing starts here...\n')
-
-// console.log('reading data from file\n', readDataFromFile(dataUrl))
-
-// console.log('\n----------\n')
-
-// const samplePost2 = {
-//   id: 'dbdae69a-99d5-4c71-addc-fbc831f13f01',
-//   title: 'Post Three added',
-//   body: 'Post 3 added',
-//   link: 'ccc',
-//   date: 'Mon May 16 2022 09:41:59',
-//   comments: [],
-//   reactions: { laugh: 0, thumbUp: 0, poo: 0 },
-// }
-
-// const sampleComment1 = {
-//   id: 34567,
-//   body: 'Great Post, wanted to comment on it',
-//   link: 'http://wherever.com',
-//   date: 'Mon May 16 2022 17:27:52',
-//   postRef: '67197f9a-fb38-4a81-b223-c76e695cd0fa',
-// }
-
-// Call this to find a post by ID
-// findPostById(samplePost, dataUrl)
-
-// const comment1 = new Comment('Great Job', samplePost2, 'http://link1.com')
-// console.log('comment1 -> ', comment1)
-
-// Use this when adding comments
-// const postAfterCommentAdded = addComment(samplePost2, sampleComment1, dataUrl)
-// console.log('Post after comment added', postAfterCommentAdded)
