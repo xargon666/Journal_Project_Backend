@@ -44,13 +44,13 @@ app.post("/posts", (req, res) => {
   const updatedData = addPost(newPost);
 
   try {
-    if (!newPost || newPost === "") {
+    if (!newPost) {
       throw new Error("Invalid data");
     } else {
       res.status(201).send(updatedData);
     }
   } catch (err) {
-    res.status(405).send({ error: err.message });
+    res.status(404).send({ error: err.message });
   }
 });
 
@@ -103,7 +103,7 @@ app.post("/posts/emojis", (req, res) => {
       throw new Error("Invalid data");
     } else {
       const newData = addEmoji(post, clickedEmoji, dataUrl);
-      res.send(newData);
+      res.status(201).send(newData);
     }
   } catch (err) {
     res.status(405).send({ error: err.message });

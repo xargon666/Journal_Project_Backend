@@ -35,20 +35,76 @@ describe("api server", () => {
     request(api).post("/posts").send(testData).expect(201, done);
   });
 
-  test.only("it responds to post /posts/comments with status 201", (done) => {
+  test("it responds to post /posts/comments with status 201", (done) => {
     const testData = {
-      comment: "bhsdifsdiffb",
+      post: {
+        id: "ajdj-sds2-sdsd",
+        title: "Post One in file",
+        body: "Post 1 in File",
+        link: "aaa",
+        date: "Fri May 6 2022 19:30:00",
+        comments: [],
+        reactions: { laugh: 0, thumbUp: 5, poo: 0 },
+      },
+      comment: {
+        body: "comment in here blah blah blah",
+        link: "link to a giphy should go here",
+      },
     };
 
     request(api).post("/posts/comments").send(testData).expect(201, done);
   });
 
-  test.only("it responds to post /posts/emojis with status 201", (done) => {
+  test("it responds to post /posts/comments with status 404", (done) => {
     const testData = {
-      emoji: " ",
+      post: {
+        id: "ajdj-sds2-sdsd235rfwerg",
+        title: "Post One in file",
+        body: "Post 1 in File",
+        link: "aaa",
+        date: "Fri May 6 2022 19:30:00",
+        comments: [],
+        reactions: { laugh: 0, thumbUp: 5, poo: 0 },
+      },
+      comment: {
+        body: "comment in here blah blah blah",
+        link: "link to a giphy should go here",
+      },
     };
 
+    request(api).post("/posts/comments").send(testData).expect(404, done);
+  });
+
+  test("it responds to post /posts/emojis with status 201", (done) => {
+    const testData = {
+      post: {
+        id: "ajdj-sds2-sdsd",
+        title: "Post One in file",
+        body: "Post 1 in File",
+        link: "aaa",
+        date: "Fri May 6 2022 19:30:00",
+        comments: [],
+        reactions: { laugh: 0, thumbUp: 5, poo: 0 },
+      },
+      emoji: "1",
+    };
     request(api).post("/posts/emojis").send(testData).expect(201, done);
+  });
+
+  test("it responds to post /posts/emojis with status 405", (done) => {
+    const testData = {
+      post: {
+        id: "ajdj-sds2-sds3sewqf",
+        title: "Post One in file",
+        body: "Post 1 in File",
+        link: "aaa",
+        date: "Fri May 6 2022 19:30:00",
+        comments: [],
+        reactions: { laugh: 0, thumbUp: 5, poo: 0 },
+      },
+      emoji: "1",
+    };
+    request(api).post("/posts/emojis").send(testData).expect(405, done);
   });
 
   test("it responds to delete /posts with status 404", (done) => {
