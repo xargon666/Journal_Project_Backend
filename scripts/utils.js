@@ -96,7 +96,6 @@ function writePostToFile(filename, data) {
 // Cannot use progressive ids as would be unable to delete posts
 function addPost(post) {
   // console.log('postObject -> ', post)
-
   // getting the posts as a JS Object
   let data = readDataFromFile(dataUrl)
 
