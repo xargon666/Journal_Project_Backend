@@ -20,8 +20,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/posts', (req, res) => {
-  const allPosts = readDataFromFile(dataUrl)
-  res.send(allPosts)
+  try {
+    const allPosts = readDataFromFile(dataUrl)
+    res.send(allPosts)
+  } catch (err) {
+    res.status(404).send({ error: err })
+  }
 })
 
 app.get('/posts/:id', (req, res) => {
