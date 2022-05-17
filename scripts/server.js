@@ -29,7 +29,7 @@ app.get('/posts/:id', (req, res) => {
     const post = String(req.params.id)
     console.log('server.js - GET /posts/:id - post', post)
     const retrievedPost = findPostById(post, dataUrl)
-    if (!post) {
+    if (!post || !retrievedPost) {
       throw new Error('this post does not exist')
     } else {
       res.send(retrievedPost)
@@ -44,9 +44,13 @@ app.post('/posts', (req, res) => {
   const updatedData = addPost(newPost)
 
   try {
-    res.status(201).send(updatedData)
+    if (!newPost) {
+      throw new Error('Invalid data')
+    } else {
+      res.status(201).send(updatedData)
+    }
   } catch (err) {
-    res.status(404).send({ error: err.message })
+    res.status(405).send({ error: err.message })
   }
 })
 
@@ -92,6 +96,8 @@ app.post('/posts/emojis', (req, res) => {
   try {
     const post = req.body.post
     const clickedEmoji = req.body.emoji
+    console.log('POST /posts/emojis - post ->', post)
+    console.log('POST /posts/emojis - emoji ->', clickedEmoji)
 
     if (!post || !clickedEmoji) {
       throw new Error('Invalid data')
