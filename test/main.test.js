@@ -22,7 +22,10 @@ describe("api server", () => {
   });
 
   test("it responds to get /posts/doesnotexist with status 404", (done) => {
-    request(api).get("/posts/doesnotexist").expect(404, done);
+    request(api)
+      .get("/posts/doesnotexist")
+      .expect({ message: "Post could not be found" })
+      .expect(404, done);
   });
 
   test("it responds to post /posts with status 201", (done) => {
