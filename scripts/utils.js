@@ -120,13 +120,8 @@ function findPostById(postId, filename) {
   console.log('\n===== findPostById - allPostsObj type -> ', typeof allPostsObj)
 
   const targetPostIndex = allPostsObj.findIndex((postElement, index) => {
-    // console.log('index: ', index)
-    // console.log('postElement', postElement)
-    // console.log('postElement.id -> ', postElement.id)
-    // console.log('postId', postId)
     return postElement.id === postId
   })
-  // console.log('\nfindPostByUUID - targetPostIndex -> ', targetPostIndex)
 
   if (targetPostIndex === -1) {
     console.log('Post could not be found')
@@ -164,22 +159,16 @@ function deletePost(post) {
 
 function addComment(post, comment, filename) {
   const allPostsObj = readDataFromFile(filename)
-  // console.log('\naddComment - allPosts.Obj -> ', allPostsObj)
-  // console.log('\naddComment - type of allPosts.Obj -> ', typeof allPostsObj)
 
   const newComment = new Comment(comment.body, post, comment.link)
 
   const targetPostIndex = allPostsObj.findIndex(
     (postElem) => postElem.id === post.id
   )
-  // console.log('***** addComment - targetPostIndex -> ', targetPostIndex)
+
   if (targetPostIndex === -1) {
     return null
   } else {
-    // console.log(
-    //   '\n\nAAAAA addComment - allPostsObj[targetPostIndex] -> ',
-    //   allPostsObj[targetPostIndex]
-    // )
     allPostsObj[targetPostIndex].comments.push(newComment)
 
     writePostToFile(dataUrl, allPostsObj)
@@ -199,24 +188,42 @@ function addEmoji(post, emoji, filename) {
     console.log('Could not increase emoji status as post was not found.')
     return null
   } else {
-    const updatedPostArray = allPostsObj.map((postElement) => {
-      console.log('addEmoji - map - postElement.id -> ', postElement.id)
-      console.log('addEmoji - map - post.id -> ', post.id)
-      console.log('***** addEmoji - map -> ', convertNumToEmoji(0))
-      console.log(
-        'AAAAA addEmoji - map -> ',
-        postElement.reactions[convertNumToEmoji(String(emoji.emoji))]
-      )
-      if (postElement.id === post.id) {
-        return postElement.reactions[convertNumToEmoji(emoji.emoji)]++
-      }
-    })
+    const targetPost = allPostsObj[targetPostIndex]
+    console.log('targetPost: ', targetPost)
 
-    console.log('addEmoji - updatedPostArray -> ', updatedPostArray)
+    const emojiNum = Number(emoji)
+    console.log('emojiNum -> ', emojiNum)
+
+    const emojiToIncrease = convertNumToEmoji(emojiNum)
+    console.log('emojiToIncrease -> ', emojiToIncrease)
+
+    console.log('targetPost.reactions -> ', targetPost.reactions)
+
+    console.log('*** ', targetPost.reactions.emojiToIncrease)
+
+    const emojiCountNumber = targetPost.reactions[emojiToIncrease]
+    console.log('emojiCountNumber -> ', emojiCountNumber)
+
+    const increasedEmojiCounter = emojiCountNumber + 1
+    console.log('increrasedEmojiCounter ', increasedEmojiCounter)
+
+    const updatedReaction = (targetPost.reactions[emojiToIncrease] =
+      increasedEmojiCounter)
+    console.log('updatedReaction -> ', updatedReaction)
+
+    console.log('updatedtargetPost ->', targetPost)
+
+    // replace oldPost with new one
+    allPostsObj.splice(targetPostIndex, 1, targetPost)
+    console.log('allPostsObj ---> ', allPostsObj)
+
+    const stringifiedPosts = JSON.stringify(allPostsObj)
+
     // cancel all the content of the file
-    // fs.truncate(dataUrl, () => {})
-    fs.writeFileSync(JSON.stringify(updatedPostArray))
-    return updatedPostArray
+    fs.writeFile(dataUrl, stringifiedPosts, 'utf8', () => {
+      console.log('replaced data')
+    })
+    return allPostsObj
   }
 }
 
@@ -232,7 +239,6 @@ function convertNumToEmoji(emojiNumber) {
       return 'poo'
 
     default:
-      return null
   }
 }
 
@@ -245,39 +251,3 @@ module.exports = {
   addEmoji,
   dataUrl,
 }
-
-// TESTING
-
-// console.log('\nwriting and reading to the DB - testing starts here...\n')
-
-// console.log('reading data from file\n', readDataFromFile(dataUrl))
-
-// console.log('\n----------\n')
-
-// const samplePost2 = {
-//   id: 'dbdae69a-99d5-4c71-addc-fbc831f13f01',
-//   title: 'Post Three added',
-//   body: 'Post 3 added',
-//   link: 'ccc',
-//   date: 'Mon May 16 2022 09:41:59',
-//   comments: [],
-//   reactions: { laugh: 0, thumbUp: 0, poo: 0 },
-// }
-
-// const sampleComment1 = {
-//   id: 34567,
-//   body: 'Great Post, wanted to comment on it',
-//   link: 'http://wherever.com',
-//   date: 'Mon May 16 2022 17:27:52',
-//   postRef: '67197f9a-fb38-4a81-b223-c76e695cd0fa',
-// }
-
-// Call this to find a post by ID
-// findPostById(samplePost, dataUrl)
-
-// const comment1 = new Comment('Great Job', samplePost2, 'http://link1.com')
-// console.log('comment1 -> ', comment1)
-
-// Use this when adding comments
-// const postAfterCommentAdded = addComment(samplePost2, sampleComment1, dataUrl)
-// console.log('Post after comment added', postAfterCommentAdded)
