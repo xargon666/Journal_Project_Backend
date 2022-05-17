@@ -178,8 +178,6 @@ function addEmoji(post, emoji, filename) {
   const targetPostIndex = allPostsObj.findIndex(
     (postElement) => postElement.id === post.id
   )
-  console.log('**** -> ', post)
-  console.log('* post.id', post.id)
 
   if (targetPostIndex === -1) {
     throw new Error('Post was not found')
@@ -203,9 +201,7 @@ function addEmoji(post, emoji, filename) {
     const stringifiedPosts = JSON.stringify(allPostsObj)
 
     // replace all the content of the file
-    fs.writeFile(dataUrl, stringifiedPosts, 'utf8', () => {
-      console.log('replaced data')
-    })
+    fs.writeFile(dataUrl, stringifiedPosts, 'utf8', () => {})
     return allPostsObj
   }
 }
