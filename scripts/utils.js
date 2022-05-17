@@ -102,6 +102,12 @@ function addPost(post) {
 
   const newPost = new Post(post.title, post.body, post.link)
 
+  if (newPost.title.length > 50 || newPost.body.length > 200) {
+    throw new Error(
+      'Title cannot be longer than 50 charactes and Text cannot be longer than 200 characters.'
+    )
+  }
+
   // adding the new Post to the data Array
   data = [...data, newPost]
   // console.log('\naddPost - data after post added -> ', data)
@@ -172,6 +178,8 @@ function addEmoji(post, emoji, filename) {
   const targetPostIndex = allPostsObj.findIndex(
     (postElement) => postElement.id === post.id
   )
+  console.log('**** -> ', post)
+  console.log('* post.id', post.id)
 
   if (targetPostIndex === -1) {
     throw new Error('Post was not found')
