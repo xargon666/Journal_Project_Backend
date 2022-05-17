@@ -1,6 +1,6 @@
-const express = require('express')
-const cors = require('cors')
-const Post = require('./data')
+const express = require("express");
+const cors = require("cors");
+const Post = require("./data");
 const {
   addComment,
   findPostById,
@@ -9,96 +9,95 @@ const {
   deletePost,
   addEmoji,
   dataUrl,
-} = require('./utils.js')
+} = require("./utils.js");
 
-const app = express()
-app.use(express.json())
-app.use(cors())
+const app = express();
+app.use(express.json());
+app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Welcome to the Journal Enrties Page!')
-})
-
-app.get('/posts', (req, res) => {
+app.get("/", (req, res) => {
+  res.send("Welcome to the Journal Enrties Page!");
+});
+// --------------- Get Posts --------------------
+app.get("/posts", (req, res) => {
   try {
-    const allPosts = readDataFromFile(dataUrl)
-    res.send(allPosts)
+    const allPosts = readDataFromFile(dataUrl);
+    res.send(allPosts);
   } catch (err) {
-    res.status(404).send({ error: err })
+    res.status(404).send({ error: err });
   }
-})
-
-app.get('/posts/:id', (req, res) => {
+});
+// --------------- Get Post by ID ---------------
+app.get("/posts/:id", (req, res) => {
   try {
-    const post = String(req.params.id)
+    const post = String(req.params.id);
 
-    const retrievedPost = findPostById(post, dataUrl)
+    const retrievedPost = findPostById(post, dataUrl);
     if (!post || !retrievedPost) {
-      throw new Error('this post does not exist')
+      throw new Error("this post does not exist");
     } else {
-      res.send(retrievedPost)
+      res.send(retrievedPost);
     }
   } catch (err) {
-    res.status(404).send({ message: err.message })
+    res.status(404).send({ message: err.message });
   }
-})
-
-app.post('/posts', (req, res) => {
-  const newPost = req.body
-  const updatedData = addPost(newPost)
-
+});
+// --------------- Send New Post ----------------
+app.post("/posts", (req, res) => {
+  const newPost = req.body;
   try {
     if (!newPost) {
-      throw new Error('Invalid data')
+      throw new Error("Invalid data");
     } else {
-      res.status(201).send(updatedData)
+      const updatedData = addPost(newPost);
+      res.status(201).send(updatedData);
     }
   } catch (err) {
-    res.status(404).send({ error: err.message })
+    res.status(404).send({ error: err.message });
   }
-})
-
-app.delete('/posts', (req, res) => {
+});
+// --------------- Delete Post ------------------
+app.delete("/posts", (req, res) => {
   try {
-    const postToBeDeleted = req.body
-    const filteredData = deletePost(postToBeDeleted)
+    const postToBeDeleted = req.body;
+    const filteredData = deletePost(postToBeDeleted);
 
-    res.status(200).send(filteredData)
+    res.status(200).send(filteredData);
   } catch (err) {
-    res.status(404).send({ error: err.message })
+    res.status(404).send({ error: err.message });
   }
-})
-
-app.post('/posts/comments', (req, res) => {
+});
+// --------------- Send New Comment -------------
+app.post("/posts/comments", (req, res) => {
   try {
-    const post = req.body.post
-    const comment = req.body.comment
+    const post = req.body.post;
+    const comment = req.body.comment;
 
-    const retrievedPostAndComments = addComment(post, comment, dataUrl)
+    const retrievedPostAndComments = addComment(post, comment, dataUrl);
 
     if (!retrievedPostAndComments) {
-      throw new Error('could not add the comment as post wasnt found')
+      throw new Error("could not add the comment as post wasnt found");
     }
-    res.status(201).send(retrievedPostAndComments)
+    res.status(201).send(retrievedPostAndComments);
   } catch (err) {
-    res.status(404).send({ error: err.message })
+    res.status(404).send({ error: err.message });
   }
-})
-
-app.post('/posts/emojis', (req, res) => {
+});
+// --------------- Send New Reaction ------------
+app.post("/posts/emojis", (req, res) => {
   try {
-    const post = req.body.post
-    const clickedEmoji = req.body.emoji
+    const post = req.body.post;
+    const clickedEmoji = req.body.emoji;
 
     if (!post || !clickedEmoji) {
-      throw new Error('Invalid data')
+      throw new Error("Invalid data");
     } else {
-      const newData = addEmoji(post, clickedEmoji, dataUrl)
-      res.status(201).send(newData)
+      const newData = addEmoji(post, clickedEmoji, dataUrl);
+      res.status(201).send(newData);
     }
   } catch (err) {
-    res.status(405).send({ error: err.message })
+    res.status(405).send({ error: err.message });
   }
-})
+});
 
-module.exports = app
+module.exports = app;
