@@ -187,12 +187,51 @@ function addComment(post, comment, filename) {
   }
 }
 
+function addEmoji(post, emoji, filename) {
+  const allPostsObj = readDataFromFile(filename)
+  const targetPostIndex = allPostsObj.findIndex(
+    (postElement) => postElement.id === post.id
+  )
+
+  if (targetPostIndex === -1) {
+    console.log('Could not increase emoji status as post was not found.')
+    return null
+  } else {
+    const updatedPostArray = allPostsObj.map((postElement) => {
+      if (postElement.id === post.id) {
+        return postElement.reactions[convertNumToEmoji(emoji.emoji)]++
+      }
+    })
+    // cancel all the content of the file
+    fs.truncate(dataUrl, () => {})
+    fs.writeFileSync(JSON.stringify(updatedPostArray))
+    return updatedPostArray
+  }
+}
+
+function convertNumToEmoji(emojiNumber) {
+  switch (emojiNumber) {
+    case 0:
+      return 'laugh'
+
+    case 1:
+      return 'thumbUp'
+
+    case 2:
+      return 'poo'
+
+    default:
+      return null
+  }
+}
+
 module.exports = {
   addPost,
   findPostById,
   addComment,
   readDataFromFile,
   deletePost,
+  addEmoji,
   dataUrl,
 }
 

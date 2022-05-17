@@ -7,6 +7,7 @@ const {
   addPost,
   readDataFromFile,
   deletePost,
+  addEmoji,
   dataUrl,
 } = require('./utils.js')
 
@@ -66,20 +67,6 @@ app.delete('/posts', (req, res) => {
 })
 
 app.post('/posts/comments', (req, res) => {
-  // Expecting to receive an object with the following structure:
-  // {
-  //   "post": {
-  // "id": "d48fs-4sdf4-sdfsd4" <- important bit
-  // "title": "postTitle",
-  // "body": "body of post in here",
-  // "link": "link of post in here"
-  // }
-  //   "comment": {
-  //     "body": "body of the comment",
-  //     "link": "link of the comment"
-  //   }
-  // }
-
   try {
     const post = req.body.post
     const comment = req.body.comment
@@ -98,6 +85,22 @@ app.post('/posts/comments', (req, res) => {
     res.status(201).send(retrievedPostAndComments)
   } catch (err) {
     res.status(404).send({ error: err.message })
+  }
+})
+
+app.post('/posts/emojis', (req, res) => {
+  try {
+    const post = req.body.post
+    const clickedEmoji = req.body.emoji
+
+    if (!post || !clickedEmoji) {
+      throw new Error('Invalid data')
+    } else {
+      const newData = addEmoji(post, clickedEmoji, dataUrl)
+      res.send(newData)
+    }
+  } catch (err) {
+    res.status(405).send({ error: err.message })
   }
 })
 
