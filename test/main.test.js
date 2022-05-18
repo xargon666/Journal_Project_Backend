@@ -27,8 +27,10 @@ describe("api server", () => {
     });
 
     test("it responds to get /posts/doesnotexist with status 404", (done) => {
+      const nonExistantPostId = "weridstring";
+
       request(api)
-        .get("/posts/doesnotexist")
+        .get(`/posts/${nonExistantPostId}`)
         .expect({ message: "Post could not be found" })
         .expect(404, done);
     });
@@ -44,6 +46,17 @@ describe("api server", () => {
 
       request(api).post("/posts").send(testData).expect(201, done);
     });
+
+    //   test("it responds to post /posts with status 404 when the title has more than 50 characters", (done) => {
+    //     const testData = {
+    //       title:
+    //         "test1 titleLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vivamus arcu felis bibendum ut tristique. Mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque. Lacinia quis vel eros donec. Tellus in hac habitasse platea dictumst vestibulum. Quis vel eros donec ac odio tempor orci. Sed viverra ipsum nunc aliquet bibendum. At augue eget arcu dictum. Purus non enim praesent elementum facilisis leo. Sollicitudin aliquam ultrices sagittis orci a scelerisque. Lacus luctus accumsan tortor posuere ac ut consequat semper. Semper risus in hendrerit gravida rutrum quisque. Risus in hendrerit gravida rutrum quisque non tellus orci. Viverra mauris in aliquam sem.",
+    //       body: "test1 body",
+    //       link: "test1 link",
+    //     };
+
+    //     request(api).post("/posts").send(testData).expect(404, done);
+    //   });
   });
 
   describe("post /posts/comments", () => {
@@ -107,26 +120,26 @@ describe("api server", () => {
         emoji: "1",
       };
       request(api).post("/posts/emojis").send(testData).expect(201, done);
+    });
 
-      test("it responds to post /posts/emojis with status 405", (done) => {
-        const testData = {
-          post: {
-            id: "ajdj-sds2-sds3sewqf",
-            title: "Post One in file",
-            body: "Post 1 in File",
-            link: "aaa",
-            date: "Fri May 6 2022 19:30:00",
-            comments: [],
-            reactions: { laugh: 0, thumbUp: 5, poo: 0 },
-          },
-          emoji: "1",
-        };
-        request(api)
-          .post("/posts/emojis")
-          .send(testData)
-          .expect({ error: "Post was not found" })
-          .expect(405, done);
-      });
+    test("it responds to post /posts/emojis with status 405", (done) => {
+      const testData = {
+        post: {
+          id: "ajdj-sds2-sds3sewqf",
+          title: "Post One in file",
+          body: "Post 1 in File",
+          link: "aaa",
+          date: "Fri May 6 2022 19:30:00",
+          comments: [],
+          reactions: { laugh: 0, thumbUp: 5, poo: 0 },
+        },
+        emoji: "1",
+      };
+      request(api)
+        .post("/posts/emojis")
+        .send(testData)
+        .expect({ error: "Post was not found" })
+        .expect(405, done);
     });
   });
 
