@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid')
 let dataUrl = './scripts/data.json'
 
 class Post {
-  constructor(title, body, link = null) {
+  constructor(title = 'Anonymous', body = null, link = null) {
     this.id = uuidv4()
     this.title = title
     this.body = body
@@ -39,7 +39,7 @@ class Post {
 
 class Comment {
   constructor(body, postObject, link = null) {
-    this.id = 0
+    this.id = uuidv4()
     this.body = body
     this.link = link
     this.date = new Date()
@@ -65,15 +65,11 @@ class Comment {
 // Utility Function
 // reads the JSOn file, converts it to a JS Object and returns it
 function readDataFromFile(filename) {
-  try {
-    const data = fs.readFileSync(filename)
-    const jsonData = JSON.parse(data)
-    // console.log(`readDataFromFile - logging JSOn string ->\n${data}\n `)
-    // console.log('readDataFromFile - logginf JS object -> \n', jsonData)
-    return jsonData
-  } catch (err) {
-    console.error(err)
-  }
+  const data = fs.readFileSync(filename)
+  const jsonData = JSON.parse(data)
+  // console.log(`readDataFromFile - logging JSOn string ->\n${data}\n `)
+  // console.log('readDataFromFile - logginf JS object -> \n', jsonData)
+  return jsonData
 }
 
 // Utility function
@@ -85,7 +81,7 @@ function writePostToFile(filename, data) {
     fs.writeFileSync(filename, stringData)
     // return stringData
   } catch (err) {
-    console.error(err)
+    throw new Error('Error writing data to file.')
   }
 }
 
@@ -101,12 +97,6 @@ function addPost(post) {
   let data = readDataFromFile(dataUrl)
 
   const newPost = new Post(post.title, post.body, post.link)
-
-  if (newPost.title.length > 50 || newPost.body.length > 200) {
-    throw new Error(
-      'Title cannot be longer than 50 charactes and Text cannot be longer than 200 characters.'
-    )
-  }
 
   // adding the new Post to the data Array
   data = [...data, newPost]
@@ -185,11 +175,6 @@ function addEmoji(post, emoji, filename) {
     const targetPost = allPostsObj[targetPostIndex]
     const emojiNum = Number(emoji)
 
-    if (emojiNum < 0 || emojiNum > 2) {
-      throw new Error('Trying to increase a non-existing emoji')
-      return allPostsObj
-    }
-
     const emojiToIncrease = convertNumToEmoji(emojiNum)
     const emojiCountNumber = targetPost.reactions[emojiToIncrease]
     const increasedEmojiCounter = emojiCountNumber + 1
@@ -257,5 +242,9 @@ module.exports = {
   deletePost,
   addEmoji,
   updatePost,
+  convertNumToEmoji,
+  Post,
+  Comment,
+  writePostToFile,
   dataUrl,
 }
