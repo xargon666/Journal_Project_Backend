@@ -171,17 +171,27 @@ describe('api server', () => {
         .expect(404, done)
     })
 
-    // test.only('it responds to delete /posts with status 200 if a post is successfully deleted', (done) => {
-    //   const newPost = request(api).get('/posts').
+    test.only('it responds to delete /posts with status 200 if a post is successfully deleted', (done) => {
+      const newPost = {
+        title: 'test title',
+        body: 'test body',
+        link: 'test link',
+      }
 
-    //   request(api)
-    //     .post('/posts')
-    //     .send(newPost)
-    //     .expect(201)
-    //     .then(() => {
-    //       request(api).delete('/posts').send(newPost).expect(200, done)
-    //     })
-    // })
+      // we create a new post through the appropriate route
+      request(api)
+        .post('/posts')
+        .send(newPost)
+        // we get the id of the last post (pushed to the end of an array)
+        .then((response) => {
+          const newPostId = response.body[response.body.length - 1].id
+          return newPostId
+        })
+        // we use the id of the last post to delete the post
+        .then((postId) => {
+          request(api).delete('/posts').send({ id: postId }).expect(200, done)
+        })
+    })
   })
 
   afterAll((done) => {
