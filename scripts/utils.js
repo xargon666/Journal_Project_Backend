@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid')
 let dataUrl = './scripts/data.json'
 
 class Post {
-  constructor(title, body, link = null) {
+  constructor(title = 'Anonymous', body = null, link = null) {
     this.id = uuidv4()
     this.title = title
     this.body = body
@@ -39,7 +39,7 @@ class Post {
 
 class Comment {
   constructor(body, postObject, link = null) {
-    this.id = 0
+    this.id = uuidv4()
     this.body = body
     this.link = link
     this.date = new Date()
@@ -81,7 +81,7 @@ function writePostToFile(filename, data) {
     fs.writeFileSync(filename, stringData)
     // return stringData
   } catch (err) {
-    console.error(err)
+    throw new Error('Error writing data to file.')
   }
 }
 
@@ -242,5 +242,9 @@ module.exports = {
   deletePost,
   addEmoji,
   updatePost,
+  convertNumToEmoji,
+  Post,
+  Comment,
+  writePostToFile,
   dataUrl,
 }
