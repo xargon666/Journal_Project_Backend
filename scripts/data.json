@@ -1,3 +1,111 @@
-
-[{"id":"123","title":"testing the srver ","body":"testing the server","link":"testing","date":"Fri May 6 2022 19:30:00","comments":[{"id":0,"body":"comment in here blah blah blah","link":"link to a giphy should go here","date":"ue May 17 2022 13:45:30","postRef":"ajdj-sds2-sdsd"},{"id":0,"body":"comment in here blah blah blah","link":"link to a giphy should go here","date":"Wed May 18 2022 12:39:19","postRef":"ajdj-sds2-sdsd"}],"reactions":{"laugh":21,"thumbUp":45,"poo":2}},{"id":"ajdj-sds2-sdsd","title":"Yep sds ","body":"updated post sadsadsaasdsadasdasdsadasdasdasdas asdasdasdasdsadasdas asdsadasdasdasdsadasdaskdmklasdjkasldmalskdmasldmlasdmlasdaksdkjdas djadkajdh dasd","link":"updated giphy should go here","date":"Fri May 6 2022 19:30:00","comments":[{"id":0,"body":"comment in here blah blah blah","link":"link to a giphy should go here","date":"ue May 17 2022 13:45:30","postRef":"ajdj-sds2-sdsd"},{"id":0,"body":"comment in here blah blah blah","link":"link to a giphy should go here","date":"Wed May 18 2022 12:39:19","postRef":"ajdj-sds2-sdsd"},{"id":0,"body":"comment in here blah blah blah","link":"link to a giphy should go here","date":"Wed May 18 2022 13:44:11","postRef":"ajdj-sds2-sdsd"},{"id":0,"body":"comment in here blah blah blah","link":"link to a giphy should go here","date":"Wed May 18 2022 13:44:24","postRef":"ajdj-sds2-sdsd"},{"id":0,"body":"comment in here blah blah blah","link":"link to a giphy should go here","date":"Wed May 18 2022 13:50:10","postRef":"ajdj-sds2-sdsd"},{"id":0,"body":"comment in here blah blah blah","link":"link to a giphy should go here","date":"Wed May 18 2022 13:55:49","postRef":"ajdj-sds2-sdsd"}],"reactions":{"laugh":21,"thumbUp":49,"poo":2}},{"id":"fds5-fdfs4-sdsds","title":"Post Two in file","body":"Post 2 in File","link":"bbb","date":"Sat May 14 2022 19:40:30","comments":[{"id":0,"body":"body from hoppscotch","link":"","date":"Mon May 16 2022 18:36:35","postRef":"fds5-fdfs4-sdsds"}],"reactions":{"laugh":2,"thumbUp":1,"poo":5}},{"id":"1ef7c5c3-c470-4c88-9d4f-91047ffb9c84","title":"test 1","body":"body 1","link":"link 1","date":"Wed May 18 2022 13:44:11","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"79e0d2af-ffad-4061-8d04-2b48ea93ee12","title":"test 1","body":"body 1","link":"link 1","date":"Wed May 18 2022 13:44:24","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"c0dd422c-7e15-439b-9fd3-516100118984","title":"test 1","body":"body 1","link":"link 1","date":"Wed May 18 2022 13:50:10","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"98db576f-5b1e-4728-918e-3b4fdb214ce9","title":"test 1","body":"body 1","link":"link 1","date":"Wed May 18 2022 13:55:49","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"5fb0f64f-b44f-4b2f-9ed1-6e53bf531ff3","title":"test title","body":"test body","link":"test link","date":"Wed May 18 2022 14:32:31","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"ab7b3691-8735-48b4-9e20-7fd7b0e1eb79","title":"test title","body":"test body","link":"test link","date":"Wed May 18 2022 14:32:56","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"6309bcb7-2966-492d-beba-7dfaaa3baae8","title":"test title","body":"test body","link":"test link","date":"Wed May 18 2022 14:33:14","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"a54ce3b3-5126-44ba-9405-7b2d698e7a4f","title":"test title","body":"test body","link":"test link","date":"Wed May 18 2022 14:33:43","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"0cbeceb1-0985-4830-9504-d9c4e6375847","title":"test title","body":"test body","link":"test link","date":"Wed May 18 2022 14:37:17","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"08c08a85-06a2-48de-a82a-3c0364f4e672","title":"test title","body":"test body","link":"test link","date":"Wed May 18 2022 14:37:28","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"a940991b-a5f8-451e-b4f6-8de9cf55d07d","title":"test title","body":"test body","link":"test link","date":"Wed May 18 2022 14:37:39","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"0edaf3ae-9f58-4384-bbd8-10785f07e01a","title":"test title","body":"test body","link":"test link","date":"Wed May 18 2022 14:39:08","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"ed5b017f-ec52-4c41-911d-9e7beb305edd","title":"test title","body":"test body","link":"test link","date":"Wed May 18 2022 14:41:48","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"d0f94a75-3a4d-486c-b610-b75031aad99f","title":"test title","body":"test body","link":"test link","date":"Wed May 18 2022 14:42:58","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}},{"id":"34ddf86c-d4a0-42b2-a3ff-b0b3e702b289","title":"test title","body":"test body","link":"test link","date":"Wed May 18 2022 14:45:13","comments":[],"reactions":{"laugh":0,"thumbUp":0,"poo":0}}]
-
+[
+  {
+    "id": "123",
+    "title": "testing the srver ",
+    "body": "testing the server",
+    "link": "testing",
+    "date": "Fri May 6 2022 19:30:00",
+    "comments": [
+      {
+        "id": 0,
+        "body": "comment in here blah blah blah",
+        "link": "link to a giphy should go here",
+        "date": "ue May 17 2022 13:45:30",
+        "postRef": "ajdj-sds2-sdsd"
+      },
+      {
+        "id": 0,
+        "body": "comment in here blah blah blah",
+        "link": "link to a giphy should go here",
+        "date": "Wed May 18 2022 12:39:19",
+        "postRef": "ajdj-sds2-sdsd"
+      }
+    ],
+    "reactions": { "laugh": 21, "thumbUp": 45, "poo": 2 }
+  },
+  {
+    "id": "ajdj-sds2-sdsd",
+    "title": "new title",
+    "body": "new body",
+    "link": "new link",
+    "date": "Fri May 6 2022 19:30:00",
+    "comments": [
+      {
+        "id": 0,
+        "body": "comment in here blah blah blah",
+        "link": "link to a giphy should go here",
+        "date": "ue May 17 2022 13:45:30",
+        "postRef": "ajdj-sds2-sdsd"
+      },
+      {
+        "id": 0,
+        "body": "comment in here blah blah blah",
+        "link": "link to a giphy should go here",
+        "date": "Wed May 18 2022 12:39:19",
+        "postRef": "ajdj-sds2-sdsd"
+      },
+      {
+        "id": 0,
+        "body": "comment in here blah blah blah",
+        "link": "link to a giphy should go here",
+        "date": "Wed May 18 2022 13:44:11",
+        "postRef": "ajdj-sds2-sdsd"
+      },
+      {
+        "id": 0,
+        "body": "comment in here blah blah blah",
+        "link": "link to a giphy should go here",
+        "date": "Wed May 18 2022 13:44:24",
+        "postRef": "ajdj-sds2-sdsd"
+      },
+      {
+        "id": 0,
+        "body": "comment in here blah blah blah",
+        "link": "link to a giphy should go here",
+        "date": "Wed May 18 2022 13:50:10",
+        "postRef": "ajdj-sds2-sdsd"
+      },
+      {
+        "id": 0,
+        "body": "comment in here blah blah blah",
+        "link": "link to a giphy should go here",
+        "date": "Wed May 18 2022 13:55:49",
+        "postRef": "ajdj-sds2-sdsd"
+      },
+      {
+        "id": 0,
+        "body": "comment in here blah blah blah",
+        "link": "link to a giphy should go here",
+        "date": "Wed May 18 2022 15:00:27",
+        "postRef": "ajdj-sds2-sdsd"
+      }
+    ],
+    "reactions": { "laugh": 21, "thumbUp": 50, "poo": 2 }
+  },
+  {
+    "id": "fds5-fdfs4-sdsds",
+    "title": "Post Two in file",
+    "body": "Post 2 in File",
+    "link": "bbb",
+    "date": "Sat May 14 2022 19:40:30",
+    "comments": [
+      {
+        "id": 0,
+        "body": "body from hoppscotch",
+        "link": "",
+        "date": "Mon May 16 2022 18:36:35",
+        "postRef": "fds5-fdfs4-sdsds"
+      }
+    ],
+    "reactions": { "laugh": 2, "thumbUp": 1, "poo": 5 }
+  },
+  {
+    "id": "1ef7c5c3-c470-4c88-9d4f-91047ffb9c84",
+    "title": "test 1",
+    "body": "body 1",
+    "link": "link 1",
+    "date": "Wed May 18 2022 13:44:11",
+    "comments": [],
+    "reactions": { "laugh": 0, "thumbUp": 0, "poo": 0 }
+  }
+]
