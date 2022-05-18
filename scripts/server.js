@@ -36,23 +36,19 @@ app.get('/posts/:id', (req, res) => {
 })
 
 app.post('/posts', (req, res) => {
-  try {
-    const newPost = req.body
+  const newPost = req.body
 
-    if (newPost.title.length <= 0 || newPost.title.length > 50) {
-      res
-        .status(405)
-        .send({ error: 'Title length should be between 1 and 50 characters' })
-    } else if (newPost.body.length <= 0 || newPost.body.length > 500) {
-      res
-        .status(405)
-        .send({ error: 'Body length should be between 1 and 500 characters' })
-    } else {
-      const updatedData = addPost(newPost)
-      res.status(201).send(updatedData)
-    }
-  } catch (err) {
-    res.status(404).send({ error: err.message })
+  if (newPost.title.length <= 0 || newPost.title.length > 50) {
+    res
+      .status(405)
+      .send({ error: 'Title length should be between 1 and 50 characters' })
+  } else if (newPost.body.length <= 0 || newPost.body.length > 500) {
+    res
+      .status(405)
+      .send({ error: 'Body length should be between 1 and 500 characters' })
+  } else {
+    const updatedData = addPost(newPost)
+    res.status(201).send(updatedData)
   }
 })
 
