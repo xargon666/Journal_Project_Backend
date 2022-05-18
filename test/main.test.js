@@ -19,7 +19,6 @@ describe("api server", () => {
     test("it responds to get /posts with status 200", (done) => {
       request(api).get("/posts").expect(200, done);
     });
-  });
 
   describe("get/posts/:id", () => {
     test("it responds to get /posts/:id with status 200", (done) => {
@@ -27,8 +26,10 @@ describe("api server", () => {
     });
 
     test("it responds to get /posts/doesnotexist with status 404", (done) => {
+      const nonExistantPostId = "weridstring";
+
       request(api)
-        .get("/posts/doesnotexist")
+        .get(`/posts/${nonExistantPostId}`)
         .expect({ message: "Post could not be found" })
         .expect(404, done);
     });
@@ -107,26 +108,26 @@ describe("api server", () => {
         emoji: "1",
       };
       request(api).post("/posts/emojis").send(testData).expect(201, done);
+    });
 
-      test("it responds to post /posts/emojis with status 405", (done) => {
-        const testData = {
-          post: {
-            id: "ajdj-sds2-sds3sewqf",
-            title: "Post One in file",
-            body: "Post 1 in File",
-            link: "aaa",
-            date: "Fri May 6 2022 19:30:00",
-            comments: [],
-            reactions: { laugh: 0, thumbUp: 5, poo: 0 },
-          },
-          emoji: "1",
-        };
-        request(api)
-          .post("/posts/emojis")
-          .send(testData)
-          .expect({ error: "Post was not found" })
-          .expect(405, done);
-      });
+    test("it responds to post /posts/emojis with status 405", (done) => {
+      const testData = {
+        post: {
+          id: "ajdj-sds2-sds3sewqf",
+          title: "Post One in file",
+          body: "Post 1 in File",
+          link: "aaa",
+          date: "Fri May 6 2022 19:30:00",
+          comments: [],
+          reactions: { laugh: 0, thumbUp: 5, poo: 0 },
+        },
+        emoji: "1",
+      };
+      request(api)
+        .post("/posts/emojis")
+        .send(testData)
+        .expect({ error: "Post was not found" })
+        .expect(405, done);
     });
   });
 
