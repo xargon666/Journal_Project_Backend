@@ -21,7 +21,7 @@ class Post {
 
   get stringDate() {
     // return todayWithDay(this.date)
-    return this.date.toString().replace('T', '').replace(/GM.+/i, '').trim()
+    return this.date.toString().slice(0, 24)
   }
 
   get getData() {
