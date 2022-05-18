@@ -8,6 +8,7 @@ const {
   readDataFromFile,
   deletePost,
   addEmoji,
+  updatePost,
   dataUrl,
 } = require('./utils.js')
 
@@ -20,14 +21,18 @@ app.get('/', (req, res) => {
 })
 
 app.get('/posts', (req, res) => {
-  const allPosts = readDataFromFile(dataUrl)
-  res.send(allPosts)
+  try {
+    const allPosts = readDataFromFile(dataUrl)
+    res.send(allPosts)
+  } catch (err) {
+    res.status(404).send({ error: err })
+  }
 })
 
 app.get('/posts/:id', (req, res) => {
   try {
     const post = String(req.params.id)
-    console.log('server.js - GET /posts/:id - post', post)
+
     const retrievedPost = findPostById(post, dataUrl)
     if (!post || !retrievedPost) {
       throw new Error('this post does not exist')
@@ -50,21 +55,16 @@ app.post('/posts', (req, res) => {
       res.status(201).send(updatedData)
     }
   } catch (err) {
-    res.status(405).send({ error: err.message })
+    res.status(404).send({ error: err.message })
   }
 })
 
 app.delete('/posts', (req, res) => {
   try {
     const postToBeDeleted = req.body
-
     const filteredData = deletePost(postToBeDeleted)
 
-    if (!filteredData) {
-      throw new Error('this post does not exist')
-    } else {
-      res.status(200).send(filteredData)
-    }
+    res.status(200).send(filteredData)
   } catch (err) {
     res.status(404).send({ error: err.message })
   }
@@ -74,17 +74,11 @@ app.post('/posts/comments', (req, res) => {
   try {
     const post = req.body.post
     const comment = req.body.comment
-    console.log('posts/comments - post -> ', post)
-    console.log('posts/comments - comment -> ', comment)
 
     const retrievedPostAndComments = addComment(post, comment, dataUrl)
-    console.log(
-      'server.js - posts/comments - retrievedPostsAndComments -> ',
-      retrievedPostAndComments
-    )
 
     if (!retrievedPostAndComments) {
-      throw new Error('could not add the comment as post wasn;t found')
+      throw new Error('could not add the comment as post wasnt found')
     }
     res.status(201).send(retrievedPostAndComments)
   } catch (err) {
@@ -96,17 +90,42 @@ app.post('/posts/emojis', (req, res) => {
   try {
     const post = req.body.post
     const clickedEmoji = req.body.emoji
-    console.log('POST /posts/emojis - post ->', post)
-    console.log('POST /posts/emojis - emoji ->', clickedEmoji)
 
     if (!post || !clickedEmoji) {
       throw new Error('Invalid data')
     } else {
       const newData = addEmoji(post, clickedEmoji, dataUrl)
-      res.send(newData)
+      res.status(201).send(newData)
     }
   } catch (err) {
     res.status(405).send({ error: err.message })
+  }
+})
+
+app.patch('/posts', (req, res) => {
+  const post = req.body.post
+  const newData = req.body.newData
+
+  try {
+    if (!post || !newData) {
+      res
+        .status(405)
+        .send({ error: 'Both the original post and the new data are needed.' })
+    } else if (
+      (newData.title && newData.title.length > 50) ||
+      (newData.body && newData.body.length > 200)
+    ) {
+      res.status(405).send({
+        error:
+          'Title cannot be longer than 50 characters and body cannot be longer than 200 characters',
+      })
+    } else {
+      const updatedPostArray = updatePost(post, newData, dataUrl)
+
+      res.send(updatedPostArray)
+    }
+  } catch (err) {
+    res.status(404).send({ error: err })
   }
 })
 
