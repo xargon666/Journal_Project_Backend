@@ -199,9 +199,6 @@ describe('api server', () => {
       const testData = {
         post: {
           id: 'ajdj-sds2-sdsd',
-          title: 'Yep sds ',
-          body: 'updated post sadsadsaasdsadasdasdsadasdasdasdas asdasdasdasdsadasdas asdsadasdasdasdsadasdaskdmklasdjkasldmalskdmasldmlasdmlasdaksdkjdas djadkajdh dasd',
-          link: 'updated giphy should go here',
         },
         newData: {
           title: 'new title',
@@ -227,27 +224,53 @@ describe('api server', () => {
       request(api).patch('/posts').send(testData).expect(404, done)
     })
 
-    test('it responds to patch with status 405 when you hit character limit ', (done) => {
+    test('it responds to patch with status 405 when the title has more than 50 characters', (done) => {
       const testData = {
         post: {
           id: 'ajdj-sds2-sdsd',
-          title:
-            'Yep sds rterwtwertrwetwwerrtwwerrtewerrtwerreretwewertywwertwertwertwertwerrtwerrtwerrtwertwerrtwertwerrtwerygbrtsruwrthrtgwefdfdfywe5yweerhdfh354yurthhfdhserhtfhcfgthyhtwerrtwerrterterterrt',
-          body: 'body test 2 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2test 2 ',
+          title: 'Yep sds sdfs',
+          body: 'thddf sdfsdfsdfsdf sdfdsfsdfsd',
         },
         newData: {
-          title: 'new title',
+          title:
+            'new title new titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew title',
           body: 'new body',
           link: 'new link',
         },
       }
+
       request(api)
         .patch('/posts')
         .send(testData)
-        // .expect({
-        //   error:
-        //     "Title cannot be longer than 50 characters and body cannot be longer than 300 characters",
-        // })
+        .expect({
+          error:
+            'Title cannot be longer than 50 characters and body cannot be longer than 500 characters',
+        })
+        .expect(405, done)
+    })
+
+    test('it responds to patch with status 405 when the body has more than 500 characters', (done) => {
+      const testData = {
+        post: {
+          id: 'ajdj-sds2-sdsd',
+          title: 'Yep sds sdfs',
+          body: 'thddf sdfsdfsdfsdf sdfdsfsdfsd',
+        },
+        newData: {
+          title:
+            'new title new titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew title new title new titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew title new titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew title new titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew title new titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew title new titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew title new titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew title new titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew title new titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew titlenew title',
+          body: 'new body',
+          link: 'new link',
+        },
+      }
+
+      request(api)
+        .patch('/posts')
+        .send(testData)
+        .expect({
+          error:
+            'Title cannot be longer than 50 characters and body cannot be longer than 500 characters',
+        })
         .expect(405, done)
     })
 
