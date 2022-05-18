@@ -19,6 +19,7 @@ describe("api server", () => {
     test("it responds to get /posts with status 200", (done) => {
       request(api).get("/posts").expect(200, done);
     });
+  });
 
   describe("get/posts/:id", () => {
     test("it responds to get /posts/:id with status 200", (done) => {
@@ -45,6 +46,17 @@ describe("api server", () => {
 
       request(api).post("/posts").send(testData).expect(201, done);
     });
+
+    //   test("it responds to post /posts with status 404 when the title has more than 50 characters", (done) => {
+    //     const testData = {
+    //       title:
+    //         "test1 titleLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vivamus arcu felis bibendum ut tristique. Mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque. Lacinia quis vel eros donec. Tellus in hac habitasse platea dictumst vestibulum. Quis vel eros donec ac odio tempor orci. Sed viverra ipsum nunc aliquet bibendum. At augue eget arcu dictum. Purus non enim praesent elementum facilisis leo. Sollicitudin aliquam ultrices sagittis orci a scelerisque. Lacus luctus accumsan tortor posuere ac ut consequat semper. Semper risus in hendrerit gravida rutrum quisque. Risus in hendrerit gravida rutrum quisque non tellus orci. Viverra mauris in aliquam sem.",
+    //       body: "test1 body",
+    //       link: "test1 link",
+    //     };
+
+    //     request(api).post("/posts").send(testData).expect(404, done);
+    //   });
   });
 
   describe("post /posts/comments", () => {
