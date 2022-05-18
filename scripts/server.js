@@ -28,9 +28,9 @@ app.get("/posts", (req, res) => {
 app.get("/posts/:id", (req, res) => {
   try {
     const post = String(req.params.id);
-
     const retrievedPost = findPostById(post, dataUrl);
     res.send(retrievedPost);
+    
   } catch (err) {
     res.status(404).send({ message: err.message });
   }
