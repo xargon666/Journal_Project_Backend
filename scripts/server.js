@@ -34,11 +34,7 @@ app.get('/posts/:id', (req, res) => {
     const post = String(req.params.id)
 
     const retrievedPost = findPostById(post, dataUrl)
-    if (!post || !retrievedPost) {
-      throw new Error('this post does not exist')
-    } else {
-      res.send(retrievedPost)
-    }
+    res.send(retrievedPost)
   } catch (err) {
     res.status(404).send({ message: err.message })
   }
