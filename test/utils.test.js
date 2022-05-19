@@ -3,7 +3,12 @@ const {
   Post,
   Comment,
   writePostToFile,
+  readDataFromFile,
+  findPostById,
 } = require('../scripts/utils')
+
+let emptyFileUrl = './test/empty_data.json'
+let testFileUrl = './test/test_data.json'
 
 describe('utils.js', () => {
   describe('convertNumToEmoji', () => {
@@ -41,7 +46,7 @@ describe('utils.js', () => {
       const newPost = new Post()
 
       expect(newPost).toBeTruthy()
-      console.log('*******', newPost)
+      // console.log('*******', newPost)
     })
   })
 
@@ -75,6 +80,33 @@ describe('utils.js', () => {
     test('testing that writePostToFile throws and error if called without parameters', () => {
       const error = () => {
         writePostToFile()
+      }
+
+      expect(error).toThrow()
+    })
+  })
+
+  describe('Read data from file', () => {
+    test('testing that if db file is empty we retrieve a temporary post', () => {
+      const tempPostArr = readDataFromFile(emptyFileUrl)
+
+      expect(tempPostArr[0].title).toEqual('No Posts yet')
+    })
+  })
+
+  describe('findPostById', () => {
+    test('it finds a post if given the correct id', () => {
+      const postId = '123-test-id-123'
+      const retrievedPost = findPostById(postId, testFileUrl)
+      console.log('*****', retrievedPost)
+      expect(retrievedPost.title).toEqual('First Post')
+    })
+
+    test('tests that if post is not fond it throws an error', () => {
+      const nonExistentId = '123-qwe-456-asd-123'
+
+      const error = () => {
+        findPostById(nonExistentId, testFileUrl)
       }
 
       expect(error).toThrow()

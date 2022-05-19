@@ -67,7 +67,7 @@ class Comment {
 function readDataFromFile(filename) {
   const data = fs.readFileSync(filename)
   const jsonData = JSON.parse(data)
-  console.log('utils.js - readDataFromFile - jsonData ', jsonData.length)
+
   if (jsonData.length === 0) {
     const tempPost = new Post(
       'No Posts yet',
@@ -123,6 +123,7 @@ function addPost(post) {
 // Find a post by using its UUID
 function findPostById(postId, filename) {
   const allPostsObj = readDataFromFile(filename)
+  console.log('utils.js - findPostById - allPostsObj -> ', allPostsObj)
 
   const targetPostIndex = allPostsObj.findIndex((postElement, index) => {
     return postElement.id === postId
