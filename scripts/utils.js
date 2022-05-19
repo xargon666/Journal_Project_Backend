@@ -67,6 +67,16 @@ class Comment {
 function readDataFromFile(filename) {
   const data = fs.readFileSync(filename)
   const jsonData = JSON.parse(data)
+  console.log('utils.js - readDataFromFile - jsonData ', jsonData.length)
+  if (jsonData.length === 0) {
+    const tempPost = new Post(
+      'No Posts yet',
+      'Be the first one to leave a Post!'
+    )
+    tempPost.isTemporary = true
+    const tempPostArray = [tempPost]
+    return tempPostArray
+  }
   // console.log(`readDataFromFile - logging JSOn string ->\n${data}\n `)
   // console.log('readDataFromFile - logginf JS object -> \n', jsonData)
   return jsonData
@@ -98,10 +108,14 @@ function addPost(post) {
 
   const newPost = new Post(post.title, post.body, post.link)
 
+  console.log('utils.js - addPost -> data ', data)
+
   // adding the new Post to the data Array
   data = [...data, newPost]
+  const updatedData = data.filter((post) => !post.isTemporary)
+  // data.push(newPost)
   // console.log('\naddPost - data after post added -> ', data)
-  writePostToFile(dataUrl, data)
+  writePostToFile(dataUrl, updatedData)
 
   return data
 }
