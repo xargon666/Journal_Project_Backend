@@ -1,5 +1,5 @@
 # 🖥 Journal Project Backend
-Project made as a week-long group project by the students of the FutureProof Bootcamp (Auguste cohort)
+Project made as a week-long group project by the students of the FutureProof Bootcamp (Auguste cohort) on LAP 1.
 
 ## Description
 This is the backend server and database (a simple json file) for the project located at [this link](https://github.com/xargon666/Journal_Project_Frontend).
