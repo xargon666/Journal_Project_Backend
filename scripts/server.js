@@ -54,6 +54,7 @@ app.post('/posts', (req, res) => {
 
 app.delete('/posts', (req, res) => {
   try {
+    console.log('server.js - DELETE /posts - req.body -> ', req.body)
     const postToBeDeleted = req.body
     const filteredData = deletePost(postToBeDeleted)
 
