@@ -1,4 +1,4 @@
-# Journal Project Backend
+# 🖥 Journal Project Backend
 Project made as a week-long group project by the students of the FutureProof Bootcamp (Auguste cohort)
 
 ## Description
@@ -15,20 +15,20 @@ The server can accept different types of requests:
 | POST          | /posts/emojis | JSON Object with two properties: 'post' and 'emoji' | All Posts and comments  | When clicking on an emoji icon  |
 | PATCH         | /posts      | JSON Object with two properties: 'post' and 'newData' | All the Posts and comments  | When updating a previous Post |
 
-## Deployment
+## 💾 Deployment
 The application has been deployed on Heroku at [this link](https://journal-project-backend.herokuapp.com/).
 
-## Installation & usage
+## 🎮 Installation & usage
 Locally:
 ```
 npm install
 npm start
 ```
 In the cloud:
-1. Use the frontend app located at [this link](https://github.com/xargon666/Journal_Project_Frontend)
+1. Use the frontend app located at [this link](https://github.com/xargon666/Journal_Project_Frontend](https://journal-project-lemon.netlify.app/)
 2. Use a service like [Hoppscotch](https://hoppscotch.io/)
 
-## Technologies
+## 📟 Technologies
 1. NodeJS : javascript runtime
 2. ExpressJS : framework for nodejs that has been used to create the webserver
 3. Jest: test runner
@@ -38,28 +38,28 @@ In the cloud:
 7. Zoom: to make the daily standups
 8. Slack: to communicate with the team members
 
-## Process
+## 🤔 Process
 Developed routes and testings separately with frequent catch up to help each other.
 Used: 
 - independent programming
 - pair-programming
 - (remote) mob-programming.
 
-## Licence
+## 🪪 Licence
 ISC
 
 From [Wikipedia](https://en.wikipedia.org/wiki/ISC_license):
 - The ISC license is a permissive free software license published by the Internet Software Consortium, now called Internet Systems Consortium (ISC). It is functionally equivalent to the simplified BSD and MIT licenses, but without language deemed unnecessary following the Berne Convention
 
-## WINS
+## 🏆 WINS
 - The server is working
 - Getting excellent Coverage for tests
 - Handling multiple errors with quite a bit of validation
 - Cooperation has worked great
 - Backend and Frontend communicate flawlessly 
-- Few merge conflicts as discussed pushing and pulling and worked on independent branches
+- Few merge conflicts as we agreed on when to push and merge beforehand and also worked on separate branches
 
-## Challenges
+## 😫 Challenges
 - Using Heroku as a team instead of a single developer
 - Covering so many tests and cases
-- Plan how to implement the features and how to send/receive data between frontens and backend
+- Plan how to implement the features and how to send/receive data between frontend and backend
