@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require('uuid')
 const {
   convertNumToEmoji,
   Post,
@@ -7,6 +8,7 @@ const {
   findPostById,
   addComment,
   addEmoji,
+  updatePost,
 } = require('../scripts/utils')
 
 let emptyFileUrl = './test/empty_data.json'
@@ -149,7 +151,7 @@ describe('utils.js', () => {
         .reactions['laugh']
       console.log('laugh number', retrievedPostLaughValue)
 
-      response = addEmoji(targetPost, emojiNum, testFileUrl)
+      addEmoji(targetPost, emojiNum, testFileUrl)
 
       const retrievedPostLaughValueAfterClick = findPostById(
         postId,
@@ -160,16 +162,36 @@ describe('utils.js', () => {
         retrievedPostLaughValue + 1
       )
     })
+
+    test('testing that the function throws if the post is not found', () => {
+      const targetPost = { id: '123-test-id-123-does-not-exist' }
+      const emojiNum = '0'
+
+      const error = () => {
+        addEmoji(targetPost, emojiNum, testFileUrl)
+      }
+
+      expect(error).toThrow()
+    })
   })
 
-  test('testing that the function throws if the post is not found', () => {
-    const targetPost = { id: '123-test-id-123-does-not-exist' }
-    const emojiNum = '0'
+  describe('updatePost', () => {
+    test('testing that a post can be updated', () => {
+      const targetPost = { id: '456-test-id-456' }
+      const targetPostId = targetPost.id
 
-    const error = () => {
-      addEmoji(targetPost, emojiNum, testFileUrl)
-    }
+      const randomText = uuidv4()
+      const newPostData = { title: randomText, body: 'something', link: '' }
 
-    expect(error).toThrow()
+      const retrievedPost = findPostById(targetPostId, testFileUrl)
+
+      const returnedPostsObj = updatePost(targetPost, newPostData, testFileUrl)
+
+      const updatedPost = returnedPostsObj.filter(
+        (post) => post.id === targetPostId
+      )
+
+      expect(updatedPost[0].title).toEqual(randomText)
+    })
   })
 })
