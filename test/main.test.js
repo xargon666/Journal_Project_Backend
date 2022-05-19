@@ -24,7 +24,8 @@ describe('api server', () => {
 
   describe('get/posts/:id', () => {
     test('it responds to get /posts/:id with status 200', (done) => {
-      request(api).get('/posts/ajdj-sds2-sdsd').expect(200, done)
+      const postId = '456-test-id-456'
+      request(api).get(`/posts/${postId}`).expect(200, done)
     })
 
     test('it responds to get /posts/doesnotexist with status 404', (done) => {
@@ -73,7 +74,7 @@ describe('api server', () => {
     test('it responds to post /posts/comments with status 201', (done) => {
       const testData = {
         post: {
-          id: 'ajdj-sds2-sdsd',
+          id: '456-test-id-456',
         },
         comment: {
           body: 'comment in here blah blah blah',
@@ -113,7 +114,7 @@ describe('api server', () => {
     test('it responds to post /posts/emojis with status 201', (done) => {
       const testData = {
         post: {
-          id: 'ajdj-sds2-sdsd',
+          id: '456-test-id-456',
           title: 'Post One in file',
           body: 'Post 1 in File',
           link: 'aaa',
@@ -198,7 +199,7 @@ describe('api server', () => {
     test('it responds to patch with status 200 when the old data and new data are there and meets the character limit and  it has updated the post', (done) => {
       const testData = {
         post: {
-          id: 'ajdj-sds2-sdsd',
+          id: '456-test-id-456',
         },
         newData: {
           title: 'new title',

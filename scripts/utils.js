@@ -67,7 +67,7 @@ class Comment {
 function readDataFromFile(filename) {
   const data = fs.readFileSync(filename)
   const jsonData = JSON.parse(data)
-  console.log('utils.js - readDataFromFile - jsonData ', jsonData.length)
+
   if (jsonData.length === 0) {
     const tempPost = new Post(
       'No Posts yet',
@@ -200,7 +200,7 @@ function addEmoji(post, emoji, filename) {
     const stringifiedPosts = JSON.stringify(allPostsObj)
 
     // replace all the content of the file
-    fs.writeFileSync(dataUrl, stringifiedPosts, 'utf8')
+    fs.writeFileSync(filename, stringifiedPosts, 'utf8')
     return allPostsObj
   }
 }
