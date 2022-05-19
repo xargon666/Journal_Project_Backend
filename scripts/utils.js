@@ -123,7 +123,6 @@ function addPost(post) {
 // Find a post by using its UUID
 function findPostById(postId, filename) {
   const allPostsObj = readDataFromFile(filename)
-  console.log('utils.js - findPostById - allPostsObj -> ', allPostsObj)
 
   const targetPostIndex = allPostsObj.findIndex((postElement, index) => {
     return postElement.id === postId
@@ -201,7 +200,7 @@ function addEmoji(post, emoji, filename) {
     const stringifiedPosts = JSON.stringify(allPostsObj)
 
     // replace all the content of the file
-    fs.writeFileSync(dataUrl, stringifiedPosts, 'utf8')
+    fs.writeFileSync(filename, stringifiedPosts, 'utf8')
     return allPostsObj
   }
 }

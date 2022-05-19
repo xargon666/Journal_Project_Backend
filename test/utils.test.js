@@ -5,6 +5,8 @@ const {
   writePostToFile,
   readDataFromFile,
   findPostById,
+  addComment,
+  addEmoji,
 } = require('../scripts/utils')
 
 let emptyFileUrl = './test/empty_data.json'
@@ -98,7 +100,7 @@ describe('utils.js', () => {
     test('it finds a post if given the correct id', () => {
       const postId = '123-test-id-123'
       const retrievedPost = findPostById(postId, testFileUrl)
-      console.log('*****', retrievedPost)
+
       expect(retrievedPost.title).toEqual('First Post')
     })
 
@@ -111,5 +113,63 @@ describe('utils.js', () => {
 
       expect(error).toThrow()
     })
+  })
+
+  describe('addComment', () => {
+    test('testing that if a post is found a comment can be added', () => {
+      const targetPost = { id: '123-test-id-123' }
+      const testComment = new Comment('test comment to add', 'a link in here')
+
+      const updatedPost = addComment(targetPost, testComment, testFileUrl)
+
+      expect(updatedPost.id).toEqual(targetPost.id)
+    })
+
+    test('testing that trying to add a Comment to a non existent post throws', () => {
+      const targetPost = { id: '123-test-id-123-does-not-exist' }
+      const testComment = new Comment(
+        'test comment to add, should throw',
+        'a link in here'
+      )
+      const error = () => {
+        addComment(targetPost, testComment, testFileUrl)
+      }
+
+      expect(error).toThrow()
+    })
+  })
+
+  describe('addEmoji', () => {
+    test('testing that the function works when the post is found', () => {
+      const targetPost = { id: '123-test-id-123' }
+      const emojiNum = '0'
+
+      const postId = targetPost.id
+      const retrievedPostLaughValue = findPostById(postId, testFileUrl)
+        .reactions['laugh']
+      console.log('laugh number', retrievedPostLaughValue)
+
+      response = addEmoji(targetPost, emojiNum, testFileUrl)
+
+      const retrievedPostLaughValueAfterClick = findPostById(
+        postId,
+        testFileUrl
+      ).reactions['laugh']
+      console.log('laugh number', retrievedPostLaughValueAfterClick)
+      expect(retrievedPostLaughValueAfterClick).toEqual(
+        retrievedPostLaughValue + 1
+      )
+    })
+  })
+
+  test('testing that the function throws if the post is not found', () => {
+    const targetPost = { id: '123-test-id-123-does-not-exist' }
+    const emojiNum = '0'
+
+    const error = () => {
+      addEmoji(targetPost, emojiNum, testFileUrl)
+    }
+
+    expect(error).toThrow()
   })
 })
