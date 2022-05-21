@@ -24,8 +24,10 @@ Locally:
 npm install
 npm start
 ```
+Use with the front end client available at [this link](https://github.com/xargon666/Journal_Project_Frontend).
+
 In the cloud:
-1. Use the frontend app located at [this link](https://github.com/xargon666/Journal_Project_Frontend](https://journal-project-lemon.netlify.app/)
+1. Use the frontend app located at [this link](https://journal-project-lemon.netlify.app/)
 2. Use a service like [Hoppscotch](https://hoppscotch.io/)
 
 ## 📟 Technologies
